@@ -25,6 +25,10 @@ class Rosalind
     count_dna(s).join " "
   end
 
+  def cmd_fib s
+    fib(*s.scan(/\d+/).map(&:to_i))
+  end
+
   def cmd_gc s
     gc fasta s
   end
@@ -50,6 +54,14 @@ class Rosalind
 
   def fasta s
     Hash[*s.split(/^>(\w+)\n/).drop(1).map { |ss| ss.delete("\n") }]
+  end
+
+  def fib n, k
+    a, b = 0, 1
+    n.times do
+      a, b = b, k * a + b
+    end
+    a
   end
 
   def gc fasta
