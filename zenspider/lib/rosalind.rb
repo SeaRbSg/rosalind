@@ -1,7 +1,10 @@
 class Rosalind
   def run args
-    name = args.first.split(/[_.]/)[1]
-    puts send("cmd_#{name}", parse(ARGF.read))
+    ARGV.each do |path|
+      name = path.split(/[_.]/)[1]
+      warn "# #{name}"
+      puts send("cmd_#{name}", parse(File.read(path)))
+    end
   end
 
   def parse s
