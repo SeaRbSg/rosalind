@@ -22,11 +22,24 @@ class Rosalind
     dna.reverse.tr "ATCG", "TAGC"
   end
 
-  def run s
-    puts reverse_compliment parse s
+  def cmd_dna s
+    count_dna(s).join " "
+  end
+
+  def cmd_rna s
+    dna_to_rna s
+  end
+
+  def cmd_revc s
+    reverse_compliment s
+  end
+
+  def run args
+    name = args.first.split(/[_.]/)[1]
+    puts send("cmd_#{name}", parse(ARGF.read))
   end
 end
 
 if __FILE__ == $0 then
-  Rosalind.new.run ARGF.read
+  Rosalind.new.run ARGV
 end
