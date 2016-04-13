@@ -33,6 +33,11 @@ class Rosalind
     gc fasta s
   end
 
+  def cmd_hamm s
+    a, b = s.lines.map(&:chomp)
+    hamm a, b
+  end
+
   def cmd_prot s
     rna_to_prot s
   end
@@ -109,6 +114,10 @@ class Rosalind
 
   def gc_content dna
     100.0 * dna.delete("AT").size / dna.size
+  end
+
+  def hamm a, b
+    a.chars.zip(b.chars).count { |m, n| m != n }
   end
 
   def reverse_compliment dna
