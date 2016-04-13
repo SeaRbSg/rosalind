@@ -18,8 +18,12 @@ class Rosalind
     dna.tr "T", "U"
   end
 
+  def reverse_compliment dna
+    dna.reverse.tr "ATCG", "TAGC"
+  end
+
   def run s
-    puts dna_to_rna parse s
+    puts reverse_compliment parse s
   end
 end
 
