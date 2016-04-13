@@ -41,6 +41,20 @@ class Rosalind
     dna_to_rna s
   end
 
+  def cmd_subs s
+    s, t = s.lines.map(&:chomp)
+    indicies(s, t).join " "
+  end
+
+  def indicies s, t
+    idx, hits = 0, []
+    while idx = s.index(t, idx) do
+      idx += 1
+      hits << idx
+    end
+    hits
+  end
+
   ##
   # Helpers
 
