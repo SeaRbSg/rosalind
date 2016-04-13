@@ -62,14 +62,6 @@ class Rosalind
   ##
   # Helpers
 
-  def count_dna dna
-    %w[A C G T].map { |nt| dna.count nt }
-  end
-
-  def dna_to_rna dna
-    dna.tr "T", "U"
-  end
-
   rna_table = <<-END_RNA
      UUU F CUU L AUU I GUU V
      UUC F CUC L AUC I GUC V
@@ -91,8 +83,12 @@ class Rosalind
 
   RNA_CODON = Hash[*rna_table.scan(/\S+/)]
 
-  def rna_to_prot rna
-    rna.gsub(/.../, RNA_CODON)
+  def count_dna dna
+    %w[A C G T].map { |nt| dna.count nt }
+  end
+
+  def dna_to_rna dna
+    dna.tr "T", "U"
   end
 
   def fasta s
@@ -119,4 +115,7 @@ class Rosalind
     dna.reverse.tr "ATCG", "TAGC"
   end
 
+  def rna_to_prot rna
+    rna.gsub(/.../, RNA_CODON)
+  end
 end
