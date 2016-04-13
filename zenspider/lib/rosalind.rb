@@ -1,4 +1,9 @@
 class Rosalind
+  def run args
+    name = args.first.split(/[_.]/)[1]
+    puts send("cmd_#{name}", parse(ARGF.read))
+  end
+
   def parse s
     s.each_line.map { |l|
       case l
@@ -33,13 +38,4 @@ class Rosalind
   def cmd_revc s
     reverse_compliment s
   end
-
-  def run args
-    name = args.first.split(/[_.]/)[1]
-    puts send("cmd_#{name}", parse(ARGF.read))
-  end
-end
-
-if __FILE__ == $0 then
-  Rosalind.new.run ARGV
 end
