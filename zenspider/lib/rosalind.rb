@@ -15,18 +15,6 @@ class Rosalind
     }.compact.join "\n"
   end
 
-  def count_dna dna
-    %w[A C G T].map { |nt| dna.count nt }
-  end
-
-  def dna_to_rna dna
-    dna.tr "T", "U"
-  end
-
-  def reverse_compliment dna
-    dna.reverse.tr "ATCG", "TAGC"
-  end
-
   def cmd_dna s
     count_dna(s).join " "
   end
@@ -37,5 +25,17 @@ class Rosalind
 
   def cmd_revc s
     reverse_compliment s
+  end
+
+  def count_dna dna
+    %w[A C G T].map { |nt| dna.count nt }
+  end
+
+  def dna_to_rna dna
+    dna.tr "T", "U"
+  end
+
+  def reverse_compliment dna
+    dna.reverse.tr "ATCG", "TAGC"
   end
 end
