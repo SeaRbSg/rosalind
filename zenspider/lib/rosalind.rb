@@ -40,6 +40,11 @@ class Rosalind
     hamm a, b
   end
 
+  def cmd_iprb s
+    k, m, n = s.integers
+    recessive k, m, n
+  end
+
   def cmd_prot s
     rna_to_prot s
   end
@@ -122,11 +127,45 @@ class Rosalind
     a.chars.zip(b.chars).count { |m, n| m != n }
   end
 
+  ##
+  # bb handshakes / total handshakes
+  #
+  # given 2 BB, 2 Bb, 2 bb:
+  #
+  #    lhs   mid   rhs
+  #
+  #        B     B
+  #        B     B
+  #        B     b 0
+  #        B     b 1
+  #      0 b  3  b 2
+  #      1 b  3  b 3
+  #
+  # tri(n) + xxx + tri(m+n)    where    xxx = n*(m+n)-n
+  #      1 +  6  + 6
+  #             = 13 / 60 => 0.21666
+
+  def recessive k, m, n
+    all = k + m + n
+    mix = m + n
+    total = 4.0 * triangle(all) # 2 * squareish all = 2 * 2 * triangle all
+
+    lhs = triangle n
+    mid = n * mix - n
+    rhs = triangle mix
+
+    1 - (lhs+mid+rhs) / total
+  end
+
   def reverse_compliment dna
     dna.reverse.tr "ATCG", "TAGC"
   end
 
   def rna_to_prot rna
     rna.gsub(/.../, RNA_CODON)
+  end
+
+  def triangle n
+    (n * n - n) / 2
   end
 end
