@@ -1,3 +1,5 @@
+require "extensions"
+
 class Rosalind
   def run args
     ARGV.each do |path|
@@ -26,7 +28,7 @@ class Rosalind
   end
 
   def cmd_fib s
-    fib(*s.scan(/\d+/).map(&:to_i))
+    fib(*s.integers)
   end
 
   def cmd_gc s
@@ -86,7 +88,7 @@ class Rosalind
      UGG W CGG R AGG R GGG G
    END_RNA
 
-  RNA_CODON = Hash[*rna_table.scan(/\S+/)]
+  RNA_CODON = Hash[*rna_table.words]
 
   def count_dna dna
     %w[A C G T].map { |nt| dna.count nt }
