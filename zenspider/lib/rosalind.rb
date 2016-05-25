@@ -31,6 +31,12 @@ class Rosalind
     fib(*s.integers)
   end
 
+  def cmd_fibd s
+    n, m = s.integers
+
+    fibd n, m
+  end
+
   def cmd_gc s
     gc fasta s
   end
@@ -113,6 +119,15 @@ class Rosalind
       a, b = b, k * a + b
     end
     a
+  end
+
+  def fibd n, m
+    a = [0] * m
+    a[0] = 1
+    n.pred.times do
+      a = [a[1..-1].sum] + a[0..-2]
+    end
+    a.sum
   end
 
   def gc fasta

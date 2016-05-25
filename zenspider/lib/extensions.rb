@@ -11,3 +11,9 @@ class String
     words.map(&:to_f)
   end
 end
+
+class Array
+  def sum
+    inject :+
+  end
+end
