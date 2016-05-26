@@ -51,6 +51,12 @@ class Rosalind
     recessive k, m, n
   end
 
+  def cmd_mprt s
+    prots = proteins s.words
+
+    grep_protein prots, /N[^P][ST][^P]/
+  end
+
   def cmd_prot s
     rna_to_prot s
   end
@@ -106,6 +112,16 @@ class Rosalind
 
   RNA_CODON = Hash[*rna_table.words]
 
+  def cache id
+    path = "tmp/#{id}"
+    unless File.exist? path then
+      File.open path, "w" do |f|
+        f.write yield
+      end
+    end
+    File.read path
+  end
+
   def count_dna dna
     %w[A C G T].map { |nt| dna.count nt }
   end
@@ -143,8 +159,30 @@ class Rosalind
     100.0 * dna.delete("AT").size / dna.size
   end
 
+  def grep_protein prots, re
+    prots.flat_map { |id, prots|
+      prots.values.map { |s|
+        r = s.indicies(re)
+        next if r.empty?
+        [id, r.join(" ")]
+      }
+    }.compact
+  end
+
   def hamm a, b
     a.chars.zip(b.chars).count { |m, n| m != n }
+  end
+
+  def proteins ids
+    ids.map { |id|
+      short_id = id.sub(/_.*$/, "")
+      protein = cache short_id do
+        `curl http://www.uniprot.org/uniprot/#{short_id}.fasta`
+      end
+
+
+      [id, fasta(protein)]
+    }
   end
 
   ##
