@@ -115,7 +115,7 @@ class Rosalind
   end
 
   def fasta s
-    Hash[*s.split(/^>(\w+)\n/).drop(1).map { |ss| ss.delete("\n") }]
+    Hash[*s.split(/^>([^\n]+)\n/).drop(1).map { |ss| ss.delete("\n") }]
   end
 
   def fib n, k
