@@ -64,6 +64,12 @@ class Rosalind
     grep_protein prots, /N[^P][ST][^P]/
   end
 
+  def cmd_perm s
+    n = s.to_i
+    p = 1.upto(n).to_a.permutation
+    [p.size, p.map { |a| a.join " " }]
+  end
+
   def cmd_prot s
     rna_to_prot s
   end
