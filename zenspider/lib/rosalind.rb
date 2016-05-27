@@ -23,6 +23,13 @@ class Rosalind
   ##
   # Commands
 
+  def cmd_cons s
+    profile   = profile s
+    consensus = consensus profile
+    profile   = DNA.keys.map { |c| "#{c}: #{profile.map { |h| h[c] }.join(" ")}" }
+    [consensus, *profile]
+  end
+
   def cmd_dna s
     count_dna(s).join " "
   end
@@ -124,6 +131,10 @@ class Rosalind
     File.read path
   end
 
+  def consensus profile
+    profile.map { |h| h.max_by(&:last) }.map(&:first).join
+  end
+
   def count_dna dna
     DNA.keys.map { |nt| dna.count nt }
   end
@@ -173,6 +184,20 @@ class Rosalind
 
   def hamm a, b
     a.chars.zip(b.chars).count { |m, n| m != n }
+  end
+
+  def profile s
+    dnas = fasta(s).values
+
+    profile = Array.new(dnas.first.size) { Hash.new 0 }
+
+    dnas.each do |dna|
+      dna.chars.each_with_index do |c, i|
+        profile[i][c] += 1
+      end
+    end
+
+    profile
   end
 
   def proteins ids
