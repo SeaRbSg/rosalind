@@ -81,6 +81,8 @@ class Rosalind
   ##
   # Helpers
 
+  DNA = { "A" => 0, "C" => 1, "G" => 2, "T" => 3 }
+
   aa_weight = <<-END_AA.words.each_slice(2).flat_map { |a, n| [a, n.to_f] }
     A  71.03711 C 103.00919 D 115.02694 E 129.04259
     F 147.06841 G  57.02146 H 137.05891 I 113.08406
@@ -123,7 +125,7 @@ class Rosalind
   end
 
   def count_dna dna
-    %w[A C G T].map { |nt| dna.count nt }
+    DNA.keys.map { |nt| dna.count nt }
   end
 
   def dna_to_rna dna
