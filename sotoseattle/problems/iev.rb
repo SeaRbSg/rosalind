@@ -1,4 +1,4 @@
-require_relative './problems/iprb'
+require_relative './iprb'
 
 require 'minitest/autorun'
 require 'minitest/pride'
