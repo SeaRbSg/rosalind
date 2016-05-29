@@ -1,3 +1,15 @@
+class Integer
+  def p m
+    n = self
+
+    n.fact / (n-m).fact
+  end
+
+  def fact
+    self.downto(2).inject(&:*)
+  end
+end
+
 class String
   def words
     split

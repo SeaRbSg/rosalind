@@ -76,6 +76,12 @@ class Rosalind
     [p.size, p.map { |a| a.join " " }]
   end
 
+  def cmd_pper s
+    m, n = s.integers
+
+    m.p(n) % 1_000_000
+  end
+
   def cmd_prot s
     rna_to_prot s
   end
