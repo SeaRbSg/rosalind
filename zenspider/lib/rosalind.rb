@@ -58,6 +58,12 @@ class Rosalind
     recessive k, m, n
   end
 
+  def cmd_mrna s
+    counts = RNA_CODON.values.counts
+
+    "#{s}.".chars.inject(1) { |n, c| (n * counts[c]) % 1_000_000 }
+  end
+
   def cmd_mprt s
     prots = proteins s.words
 

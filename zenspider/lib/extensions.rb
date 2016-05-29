@@ -22,6 +22,16 @@ class String
 end
 
 class Array
+  def counts
+    result = Hash.new 0
+
+    each do |v|
+      result[v] += 1
+    end
+
+    result
+  end
+
   def sum
     inject :+
   end
