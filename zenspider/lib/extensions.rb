@@ -31,6 +31,13 @@ class String
   def floats
     words.map(&:to_f)
   end
+
+  def each_cons n
+    return enum_for(:each_cons, n) unless block_given?
+    chars.each_cons(n) do |a|
+      yield a.join
+    end
+  end
 end
 
 class Array

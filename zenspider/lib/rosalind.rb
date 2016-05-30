@@ -94,6 +94,16 @@ class Rosalind
     reverse_compliment s
   end
 
+  def cmd_revp s
+    s = fasta_string s
+
+    (4..12).flat_map { |length|
+      s.each_cons(length).with_index.map { |ss, i|
+        "#{i+1} #{length}" if ss == reverse_compliment(ss)
+      }
+    }.compact
+  end
+
   def cmd_rna s
     dna_to_rna s
   end
@@ -163,6 +173,12 @@ class Rosalind
 
   def fasta s
     Hash[*s.split(/^>([^\n]+)\n/).drop(1).map { |ss| ss.delete("\n") }]
+  end
+
+  def fasta_string s
+    h = fasta s
+    raise ArgumentError, "More than one fasta string" unless h.size == 1
+    h.values.first
   end
 
   def fib n, k
