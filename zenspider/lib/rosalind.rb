@@ -58,6 +58,13 @@ class Rosalind
     recessive k, m, n
   end
 
+  def cmd_lexf s
+    a = s.words
+    l = a.pop.to_i
+
+    a.repeated_permutation(l).map(&:join)
+  end
+
   def cmd_mrna s
     counts = RNA_CODON.values.counts
 
