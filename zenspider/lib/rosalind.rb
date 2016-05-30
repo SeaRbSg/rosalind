@@ -214,8 +214,8 @@ class Rosalind
   end
 
   def grep_protein prots, re
-    prots.flat_map { |id, prots|
-      prots.values.map { |s|
+    prots.flat_map { |id, prot|
+      prot.values.map { |s|
         r = s.indicies(re)
         next if r.empty?
         [id, r.join(" ")]
