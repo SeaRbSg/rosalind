@@ -115,6 +115,14 @@ class Rosalind
     dna_to_rna s
   end
 
+  def cmd_sign s
+    n = s.integers.first
+
+    perms = signed_permutation n
+
+    [perms.length, perms.map { |a| a.join " " }]
+  end
+
   def cmd_subs s
     s, t = s.lines.map(&:chomp)
     s.indicies(t).join " "
@@ -289,6 +297,19 @@ class Rosalind
 
   def rna_to_prot rna
     rna.gsub(/.../, RNA_CODON)
+  end
+
+  def signed_permutation n
+    depth = 2 ** n
+
+    perms = 1.upto(n).to_a.permutation
+
+    perms.flat_map { |nums|
+      depth.times.map { |bits|
+        signs = nums.length.times.map { |i| bits[i].zero? ? 1 : -1 }
+        nums.zip(signs).map { |(a, b)| a * b }
+      }
+    }
   end
 
   def triangle n
