@@ -65,6 +65,15 @@ class Rosalind
     a.repeated_permutation(l).map(&:join)
   end
 
+  def cmd_lexv s
+    d = s.words
+    l = d.pop.to_i
+
+    a = (1..l).flat_map { |n| d.repeated_permutation(n).to_a.map(&:join) }
+
+    a.sort_by_dict d
+  end
+
   def cmd_mrna s
     counts = RNA_CODON.values.counts
 

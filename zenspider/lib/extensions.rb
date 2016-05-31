@@ -51,6 +51,16 @@ class Array
     result
   end
 
+  def index_hash
+    Hash[map.with_index.to_a]
+  end
+
+  def sort_by_dict ary
+    dict = ary.index_hash
+
+    sort_by { |a| a.chars.map { |v| dict[v] } }
+  end
+
   def sum
     inject :+
   end
