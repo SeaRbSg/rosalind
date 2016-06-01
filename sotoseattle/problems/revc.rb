@@ -5,10 +5,12 @@ require 'minitest/pride'
 
 class Rosalind
 
-  ## Reverse strand and substitute with complementary
+  def self.compl str
+    str.chars.map{ |x| NUCLEOTIDS[x] }.join
+  end
 
   def self.reverse_compl dna_str
-    dna_str.reverse.chars.map{ |x| NUCLEOTIDS[x] }.join
+    Rosalind.compl dna_str.reverse
   end
 
 end
