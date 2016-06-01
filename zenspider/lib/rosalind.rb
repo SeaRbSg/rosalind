@@ -58,6 +58,15 @@ class Rosalind
     recessive k, m, n
   end
 
+  def cmd_lcsm s
+    first, *rest = fasta(s).values
+
+    first.length.downto(2).each do |n|
+      v = first.each_cons(n).find { |sub| rest.all? { |ss| ss.include? sub } }
+      return v if v
+    end
+  end
+
   def cmd_lexf s
     a = s.words
     l = a.pop.to_i
