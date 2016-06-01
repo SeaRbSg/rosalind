@@ -132,6 +132,15 @@ class Rosalind
     [perms.length, perms.map { |a| a.join " " }]
   end
 
+  def cmd_splc s
+    h = fasta s
+
+    dna = h.delete h.keys.first
+    dna.gsub! Regexp.union(*h.values), ""
+
+    rna_to_prot dna_to_rna dna
+  end
+
   def cmd_subs s
     s, t = s.lines.map(&:chomp)
     s.indicies(t).join " "
