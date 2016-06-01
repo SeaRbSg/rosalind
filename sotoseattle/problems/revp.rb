@@ -6,15 +6,21 @@ require 'minitest/pride'
 
 class Rosalind
 
+  EXPLORE = [4, 6, 8, 10, 12]
+
   def self.reverse_pals yin
     max = yin.size
     yan = Rosalind.compl(yin)
     sol = []
 
     (0..max-1).each do |pos|
-      (4..max-pos).step(2).each do |len|
+      EXPLORE.each do |len|
+        next if pos + len > max
+
         if yin.slice(pos, len) == yan.slice(pos, len).reverse
-          sol << "#{pos+1} #{len}" 
+          sol << "#{pos+1} #{len}"
+        else
+          next
         end
       end
     end
@@ -32,7 +38,7 @@ class TestRosalind < Minitest::Test
   end
 end
 
-# f = File.new('../test_data/rosalind_revp.txt')
+# f = File.new("./test_data/rosalind_revp.txt")
 # o = Rosalind.reverse_pals(Rosalind.fasta(f.read).first.last)
 # File.new('./sol.txt', 'w').write(o)
 
