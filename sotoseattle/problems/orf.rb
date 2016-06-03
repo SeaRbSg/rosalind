@@ -4,31 +4,25 @@ require_relative './prot'
 class Rosalind
 
   def self.orf dnas
-    sol = []
-    fasta(dnas).values.each { |a| sol += sub_orf(a) + sub_orf(revc(a)) }
-    sol.uniq.compact.join("\n")
+    fasta(dnas).values.map do |strand|
+      [strand, revc(strand)].map { |x| possible_prots x }
+                            .flatten.uniq.compact
+    end.join("\n")
   end
 
-  private
   def self.segment str
-    sol = ''
-    str.scan(/.{3}/).each do |tri|
-      sol << tri
-      return sol if STOP_CODONS.include? tri
-    end
-    nil
+    fin = str.scan(/.{3}/).index { |x| STOP_CODONS.include? x }
+    str[0, fin * 3] if fin
   end
 
-  def self.sub_orf dna_s
-    rna_st = transcribe dna_s
-    starts = find_substrand(rna_st, START_CODON)
+  def self.possible_prots dna_s
+    rna = transcribe dna_s
+    starts = find_substrand(rna, START_CODON).map { |i| i -= 1 }
 
     starts.map do |i|
-      coding_strand = segment rna_st[i-1..-1]
+      coding_strand = segment rna[i..-1]
       encode_protein(coding_strand).chomp(EOS) if coding_strand
     end
   end
 
 end
-
-
