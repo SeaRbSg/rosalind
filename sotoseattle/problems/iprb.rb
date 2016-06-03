@@ -1,14 +1,12 @@
 require_relative './revc'
 
-require 'minitest/autorun'
-require 'minitest/pride'
-
 class Mendel
   attr_accessor :bag_o_cats
 
-  ALLE = {black: 'FF', grey: 'Ff', white: 'ff'}
-  DOMN = 'F'
-  CARD = 2
+  IPRB_ALLE = {black: 'FF', grey: 'Ff', white: 'ff'}
+  IPRB_DOMN = 'F'
+  IPRB_CARD = 2
+
 
   ## The experiment starts with a set number of colored cats in the bag.
 
@@ -41,35 +39,26 @@ class Mendel
   ## An allele is dominant if it has a Dominant one.
 
   def dominant? a
-    a.include? DOMN
+    a.include? IPRB_DOMN
   end
 
   ## Probability of kitten with dominant phenotype (at least one F allele),
   #  given two parents of colors a and b.
 
   def prob_pheno_dominant_given_parent_colors a, b
-    possible_combinations = ALLE[a].chars.product ALLE[b].chars
-    possible_combinations.count{ |x| dominant? x }.to_f / (CARD * CARD)
+    possible_combinations = IPRB_ALLE[a].chars.product IPRB_ALLE[b].chars
+    possible_combinations.count{ |x| dominant? x }.to_f / (IPRB_CARD * IPRB_CARD)
   end
 
   ## Compute all possibilities and add all probabilities
 
-  def law_1
+  def iprb_law_1
     all_possible_cat_pairs.map do |a, b|
       prob_selecting_cats_of_colors(a, b) *
       prob_pheno_dominant_given_parent_colors(a, b)
     end.reduce(:+)
   end
 end
-
-class TestMendel < Minitest::Test
-  def test_I_law
-    assert_in_delta 0.78333, Mendel.new(2, 2, 2).law_1, 0.0001
-    assert_in_delta 0.84731, Mendel.new(30, 20, 16).law_1, 0.0001
-  end
-end
-
-
 
 # A hardcoded initial version
 #

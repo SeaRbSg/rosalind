@@ -1,13 +1,10 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative './rosalind_k'
 
 class Rosalind
 
-  NUCLEOTIDS = {'A' => 'T', 'C' => 'G', 'G' => 'C', 'T' => 'A'}
-
   ## Count all nucleotids in order
 
-  def self.nucleo_count dna_str
+  def self.dna_nucleo_count dna_str
     NUCLEOTIDS.keys.sort.map{ |c| dna_str.count c }.join " "
   end
 
@@ -17,11 +14,4 @@ class Rosalind
     input_dna.delete("\n").delete(" ").scan(/>(Rosalind_\d+)([AGCT]+)/)
   end
 
-end
-
-class TestRosalind < Minitest::Test
-  def test_count_nucleothingies
-    chorizo = 'AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC'
-    assert_equal '20 12 17 21', Rosalind.nucleo_count(chorizo)
-  end
 end
