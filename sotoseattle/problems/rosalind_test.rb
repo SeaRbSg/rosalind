@@ -84,14 +84,6 @@ class TestRosalind < Minitest::Test
     assert_equal 4, FibonacciRabbits.fibd(6, 3)
   end
 
-  def test_mrna_congruency
-    a, b, c, d = 29, 73, 10, 32
-    n = 11
-    assert Rosalind.congruent?(a, b, n)
-    assert Rosalind.congruent?(c, d, n)
-    assert Rosalind.congruent?(a+c, b+d, n)
-  end
-
   def test_mrna_basic
     assert_equal 12, Rosalind.mrna('MA')
   end
