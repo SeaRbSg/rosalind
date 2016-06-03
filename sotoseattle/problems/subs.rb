@@ -2,8 +2,7 @@ require_relative './revc'
 
 class Rosalind
 
-  ## Find where a substring t shows up in s
-
+  ## subs exercise == find where a substring t shows up in s
   def self.subs s, t
     sol = []
     acc = 0
@@ -14,6 +13,10 @@ class Rosalind
       sol << acc
       s = s[i+1..-1]
     end
+  end
+
+  class << self
+    alias_method :find_substrand, :subs
   end
 
 end

@@ -21,7 +21,7 @@ class Rosalind
 
   def self.sub_orf dna_s
     rna_st = transcribe dna_s
-    starts = subs(rna_st, START_CODON)
+    starts = find_substrand(rna_st, START_CODON)
 
     starts.map do |i|
       coding_strand = segment rna_st[i-1..-1]
