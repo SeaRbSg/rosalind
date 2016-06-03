@@ -1,6 +1,6 @@
 require 'set'
 
-class Rosalind
+class FibonacciRabbits
   @@cache = {}
 
   def self.fibd n, m
@@ -9,7 +9,7 @@ class Rosalind
                    elsif n < 2
                      1
                    else
-                     (2..m).inject(0) { |t, i| t += fibd(n-i, m) }
+                     (2..m).inject(0) { |t, i| t += self.fibd(n-i, m) }
                    end
   end
 end

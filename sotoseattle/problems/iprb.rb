@@ -1,12 +1,11 @@
 require_relative './revc'
 
-class Mendel
+class MendelKittens
   attr_accessor :bag_o_cats
 
   IPRB_ALLE = {black: 'FF', grey: 'Ff', white: 'ff'}
   IPRB_DOMN = 'F'
   IPRB_CARD = 2
-
 
   ## The experiment starts with a set number of colored cats in the bag.
 

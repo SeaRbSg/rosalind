@@ -22,12 +22,6 @@ class Rosalind
                 'UGA' => '-', 'CGA' => 'R', 'AGA' => 'R', 'GGA' => 'G',
                 'UGG' => 'W', 'CGG' => 'R', 'AGG' => 'R', 'GGG' => 'G'}
 
-  ## iev
-  IEV_BASE = %w[AA-AA AA-Aa AA-aa Aa-Aa Aa-aa aa-aa] # the 6 base couples
-  IEV_DOMN = 'A'                                     # dominant 4 phenotype
-  IEV_CARD = 2.0                                     # allele cardinality
-  IEV_OFFS = 2.0                                     # size of litter
-
   ## mrna
   EOS = "-"                                          # End of Strand
 

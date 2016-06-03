@@ -30,13 +30,13 @@ class TestRosalind < Minitest::Test
   end
 
   def test_ipbr
-    assert_in_delta 0.78333, Mendel.new(2, 2, 2).iprb_law_1, 0.0001
-    assert_in_delta 0.84731, Mendel.new(30, 20, 16).iprb_law_1, 0.0001
+    assert_in_delta 0.78333, MendelKittens.new(2, 2, 2).iprb_law_1, 0.0001
+    assert_in_delta 0.84731, MendelKittens.new(30, 20, 16).iprb_law_1, 0.0001
   end
 
   def test_fib
-    assert_equal 19, Rosalind.fib(5, 3)
-    assert_equal 89478485, Rosalind.fib(28, 2)
+    assert_equal 19, FibonacciRabbits.fib(5, 3)
+    assert_equal 89478485, FibonacciRabbits.fib(28, 2)
   end
 
   def test_gc_simplest
@@ -70,18 +70,18 @@ class TestRosalind < Minitest::Test
   end
 
   def test_iev
-    assert_equal 3.5, Rosalind.iev([1,0,0,1,0,1])
-    assert_equal 7.0, Rosalind.iev([2,0,0,2,0,2])
-    assert_equal 161131.5, Rosalind.iev([18495, 19225, 19691, 18455, 18627, 18776])
+    assert_equal 3.5, MendelKittens.iev([1,0,0,1,0,1])
+    assert_equal 7.0, MendelKittens.iev([2,0,0,2,0,2])
+    assert_equal 161131.5, MendelKittens.iev([18495, 19225, 19691, 18455, 18627, 18776])
   end
 
   def test_fibd
-    assert_equal 1, Rosalind.fibd(1, 3)
-    assert_equal 1, Rosalind.fibd(2, 3)
-    assert_equal 2, Rosalind.fibd(3, 3)
-    assert_equal 2, Rosalind.fibd(4, 3)
-    assert_equal 3, Rosalind.fibd(5, 3)
-    assert_equal 4, Rosalind.fibd(6, 3)
+    assert_equal 1, FibonacciRabbits.fibd(1, 3)
+    assert_equal 1, FibonacciRabbits.fibd(2, 3)
+    assert_equal 2, FibonacciRabbits.fibd(3, 3)
+    assert_equal 2, FibonacciRabbits.fibd(4, 3)
+    assert_equal 3, FibonacciRabbits.fibd(5, 3)
+    assert_equal 4, FibonacciRabbits.fibd(6, 3)
   end
 
   def test_mrna_congruency

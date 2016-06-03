@@ -1,6 +1,6 @@
 require_relative './revc'
 
-class Rosalind
+class FibonacciRabbits
 
   def self.fib n, k
     return 1 if n <= 2
