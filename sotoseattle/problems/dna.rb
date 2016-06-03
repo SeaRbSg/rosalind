@@ -9,7 +9,7 @@ class Rosalind
 
   ## Count all nucleotids in order
   def self.dna_nucleo_count dna_str
-    NUCLEOTIDS.keys.sort.map{ |c| dna_str.count c }
+    NUCLEIC_ACIDS.keys.sort.map{ |c| dna_str.count c }
   end
 
   ## Parse dna strings in FASTA format

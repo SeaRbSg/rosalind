@@ -2,7 +2,7 @@
 class Rosalind
 
   ## dna
-  NUCLEOTIDS = {'A' => 'T', 'C' => 'G', 'G' => 'C', 'T' => 'A'}
+  NUCLEIC_ACIDS = {'A' => 'T', 'C' => 'G', 'G' => 'C', 'T' => 'A'}
 
   ## prot
   RNA2AMIN  = { 'UUU' => 'F', 'CUU' => 'L', 'AUU' => 'I', 'GUU' => 'V',
