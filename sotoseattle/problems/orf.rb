@@ -20,7 +20,7 @@ class Rosalind
   end
 
   def self.sub_orf dna_s
-    rna_st = rna dna_s
+    rna_st = transcribe dna_s
     starts = subs(rna_st, START_CODON)
 
     starts.map do |i|
