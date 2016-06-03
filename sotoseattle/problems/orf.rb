@@ -25,7 +25,7 @@ class Rosalind
 
     starts.map do |i|
       coding_strand = segment rna_st[i-1..-1]
-      prot(coding_strand).chomp(EOS) if coding_strand
+      encode_protein(coding_strand).chomp(EOS) if coding_strand
     end
   end
 
