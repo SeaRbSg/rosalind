@@ -18,7 +18,7 @@ class TestRosalind < Minitest::Test
 
   def test_dna
     chorizo = 'AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC'
-    assert_equal '20 12 17 21', Rosalind.dna_nucleo_count(chorizo)
+    assert_equal '20 12 17 21', Rosalind.dna(chorizo)
   end
 
   def test_rna
