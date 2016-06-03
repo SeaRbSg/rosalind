@@ -3,31 +3,27 @@ require './dna'
 class Rosalind
 
   def self.cons dna_stuff
-    profi = profile fasta(dna_stuff).values
-    sol = [consensus(profi)]
+    pr = profile   fasta(dna_stuff).values
+    cn = consensus pr
 
-    profi.each { |k, v| sol << "#{k}: #{v.join(' ')}" }
-    sol.join("\n")
+    [cn.join, pr.map { |k, v| "#{k}: #{v.join(' ')}" }].join("\n")
   end
 
   def self.consensus a_profile
     keys, values = a_profile.keys, a_profile.values
+    number_chars = values.first.size
 
-    (0...values.first.size).map do |j|
-      keys[values.map { |x| x[j] }.each_with_index.max[1]]
-    end.join
+    (0...number_chars).map do |i|
+      keys[values.map { |x| x[i] }.each_with_index.max[1]]
+    end
   end
 
   def self.profile strands
-    prof = {}
-    m, n = strands.size, strands.first.size
+    Hash[NUCLEIC_ACIDS.keys.map { |nuc| [nuc, count_nucleic(nuc, strands)] }]
+  end
 
-    %w[A C G T].map do |nucleotid|
-      prof[nucleotid] = (0...n).map do |j|
-        strands.count { |s| nucleotid == s[j] }
-      end
-    end
-
-    prof
+  def self.count_nucleic nucl, strands
+    number_chars = strands.first.size
+    (0...number_chars).map { |i| strands.count { |s| nucl == s[i] } }
   end
 end
