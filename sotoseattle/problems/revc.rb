@@ -2,12 +2,18 @@ require_relative './rna'
 
 class Rosalind
 
-  def self.compl str
-    str.chars.map{ |x| NUCLEIC_ACIDS[x] }.join
+  ## revc exercise == reverse complement of a dna strand
+  def self.revc dna_strand
+    complement(dna_strand).reverse
   end
 
-  def self.revc dna_str
-    compl dna_str.reverse
+  class << self
+    alias_method :reverse_complement, :revc
+  end
+
+  ## complement of a dna string
+  def self.complement dna_strand
+    dna_strand.chars.map{ |x| NUCLEIC_ACIDS[x] }.join
   end
 
 end

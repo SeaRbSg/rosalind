@@ -4,7 +4,7 @@ class Rosalind
 
   def self.revp yin
     max = yin.size
-    yan = Rosalind.compl(yin)
+    yan = Rosalind.complement(yin)
     sol = []
 
     (0..max-1).each do |pos|
