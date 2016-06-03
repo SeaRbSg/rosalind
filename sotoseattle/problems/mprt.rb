@@ -2,27 +2,19 @@ require 'open-uri'
 
 class Rosalind
 
-  def self.fasto input_prot
-    input_prot.split("\n").reject { |a| a.match(/^\>/) }.join
-  end
+  def self.mprt bunch_o_proteins, motif = /(?=(N[^P][S|T][^P]))/
 
-  def self.urify proto
-    basic = proto.match(PROTEIN_BASIC)[1]
-    URI("http://www.uniprot.org/uniprot/#{basic}.fasta")
-  end
+    sol = bunch_o_proteins.split.map do |protein|
+      u = URI("http://www.uniprot.org/uniprot/#{protein}.fasta")
 
-  def self.mprt proteins
-    sol = []
+      strand = open(u).read.split("\n").reject { |a| a.match(/^\>/) }.join
 
-    proteins.split.each do |proto|
-      strand    = fasto open(urify(proto)).read
-      positions = strand.scan(N_GLYCOSYLATION).flatten
-                  .map { |s| strand.index(s) + 1 }
-                  .join ' '
+      positions = strand.scan(motif).flatten.map { |s| strand.index(s) + 1 }.join ' '
 
-      (sol << proto << positions) unless positions == ''
+      [protein, positions] unless positions.empty?
     end
 
-    sol.join("\n")
+    sol.flatten.compact.join("\n")
   end
+
 end

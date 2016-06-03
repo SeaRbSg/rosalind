@@ -125,7 +125,6 @@ class TestRosalind < Minitest::Test
   end
 
   def test_mprt_exercise
-    skip # too long
     inputo = File.open('../test_data/rosalind_mprt.txt').read
     output = File.open('../test_data/sol_mprt.txt').read
     assert_equal output, Rosalind.mprt(inputo)

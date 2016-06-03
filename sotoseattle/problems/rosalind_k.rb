@@ -47,10 +47,6 @@ class Rosalind
                  'W' =>  186.07931,
                  'Y' =>  163.06333 }
 
-  ## mprt
-  N_GLYCOSYLATION = /(?=(N[^P][S|T][^P]))/
-  PROTEIN_BASIC   = /^([A-Z0-9]+)_*/
-
   ## revp
   REVP_EXPLORE = [4, 6, 8, 10, 12]
 
@@ -58,6 +54,5 @@ class Rosalind
   ## orf
   START_CODON = 'AUG'
   STOP_CODONS = %w{UAG UGA UAA}
-
 
 end
