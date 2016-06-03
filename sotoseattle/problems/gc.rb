@@ -4,7 +4,7 @@ class Rosalind
 
   ## gc exercise == pick the label of the dna strand with highest GC content
   def self.gc dna_str
-    fasta(dna_str).map{ |lab, str| [lab, self.gc_content(str)] }.max_by &:last
+    fasta(dna_str).to_a.map{ |lab, str| [lab, self.gc_content(str)] }.max_by &:last
   end
 
   ## GC content of dna strand

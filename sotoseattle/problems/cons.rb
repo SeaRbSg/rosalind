@@ -3,9 +3,7 @@ require './dna'
 class Rosalind
 
   def self.cons dna_stuff
-    strs  = fasta(dna_stuff).map { |a| a.last }
-
-    profi = profile(strs)
+    profi = profile fasta(dna_stuff).values
     sol = [consensus(profi)]
 
     profi.each { |k, v| sol << "#{k}: #{v.join(' ')}" }

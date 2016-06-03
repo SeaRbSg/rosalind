@@ -5,7 +5,7 @@ class Rosalind
 
   def self.orf dnas
     sol = []
-    fasta(dnas).each { |a| sol += sub_orf(a.last) + sub_orf(revc(a.last)) }
+    fasta(dnas).values.each { |a| sol += sub_orf(a) + sub_orf(revc(a)) }
     sol.uniq.compact.join("\n")
   end
 

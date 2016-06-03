@@ -14,7 +14,7 @@ class Rosalind
 
   ## Parse dna strings in FASTA format
   def self.fasta input_dna
-    input_dna.delete("\n").delete(" ").scan(/>(Rosalind_\d+)([AGCT]+)/)
+    Hash[input_dna.delete("\n").delete(" ").scan(/>(Rosalind_\d+)([AGCT]+)/)]
   end
 
 end

@@ -4,7 +4,7 @@ require_relative 'subs'
 class Rosalind
 
   def self.lcsm read_file
-    strands = fasta(read_file).map(&:last)
+    strands = fasta(read_file).values
     base = strands.shift.chars
 
     [*1..base.size].reverse.each do |i|

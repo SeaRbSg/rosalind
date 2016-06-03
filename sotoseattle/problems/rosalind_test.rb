@@ -89,7 +89,7 @@ class TestRosalind < Minitest::Test
   end
 
   def test_mrna_exercise
-    i = File.new("../test_data/rosalind_mrna.txt").read
+    i = File.new('../test_data/rosalind_mrna.txt').read
     assert_equal 770624, Rosalind.mrna(i)
   end
 
@@ -98,25 +98,25 @@ class TestRosalind < Minitest::Test
   end
 
   def test_prtm_long
-    i = File.new("../test_data/rosalind_mrna.txt").read
+    i = File.new('../test_data/rosalind_mrna.txt').read
     assert_in_delta 118465.66184, Rosalind.prtm(i), 0.0001
   end
 
   def test_prtm_exercise
-    i = File.new("../test_data/rosalind_prtm.txt").read
+    i = File.new('../test_data/rosalind_prtm.txt').read
     assert_in_delta 105527.78843, Rosalind.prtm(i), 0.0001
   end
 
   def test_grph_simple
     input  = ">Rosalind_0498\nAAATAAA\n>Rosalind_2391\nAAATTTT\n>Rosalind_2323\nTTTTCCC\n>Rosalind_0442\nAAATCCC\n>Rosalind_5013\nGGGTGGG\n"
-    output = "Rosalind_0498 Rosalind_2391\nRosalind_2391 Rosalind_2323\nRosalind_0498 Rosalind_0442"
+    output = ['Rosalind_0498 Rosalind_2391', 'Rosalind_2391 Rosalind_2323', 'Rosalind_0498 Rosalind_0442']
     assert_equal output, Rosalind.grph(input, 3)
   end
 
   def test_grph_exercise
-    input  = File.new("../test_data/rosalind_grph.txt").read
-    output = File.new("../test_data/sol_grph.txt").read
-    assert_equal output, Rosalind.grph(input, 3)
+    input  = File.new('../test_data/rosalind_grph.txt').read
+    output = File.new('../test_data/sol_grph.txt').read
+    assert_equal output.split("\n"), Rosalind.grph(input, 3)
   end
 
   def test_mprt_basic
