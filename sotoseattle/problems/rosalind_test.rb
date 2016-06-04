@@ -10,6 +10,7 @@ require_relative '../problems/grph.rb'
 require_relative '../problems/mprt.rb'
 require_relative '../problems/cons.rb'
 require_relative '../problems/orf.rb'
+require_relative '../problems/splc.rb'
 require_relative '../problems/lcsm.rb'
 require_relative '../problems/perm.rb'
 require_relative '../problems/revp.rb'
@@ -180,5 +181,16 @@ class TestRosalind < Minitest::Test
     assert_equal output, Rosalind.orf(inputo)
   end
 
+  def test_splc
+    inputo = ">Rosalind_10\nATGGTCTACATAGCTGACAAACAGCACGTAGCAATCGGTCGAATCTCGAGAGGCATATGGTCACATGATCGGTCGAGCGTGTTTCAAAGTTTGCGCCTAG\n>Rosalind_12\nATCGGTCGAA\n>Rosalind_15\nATCGGTCGAGCGTGT"
+    output = 'MVYIADKQHVASREAYGHMFKVCA'
+    assert_equal output, Rosalind.splc(inputo)
+  end
+
+  def test_splc_exercise
+    inputo = File.open('../test_data/rosalind_splc.txt').read
+    output = 'MARPTPQPICLCQCERLCITIGHSILSPSDMSLHYDHHKEREPGISVGIKVPTTHGGTTLRQFFPPRVDDISLPNPSPLRSQLDHKELPQSAPLFMAASRCIVYLGLANSTERTSNRENVHNKSWDRTHTGCDSTPGTGFLTGPPYMAVVIRNPQMTILQLVLHWQGYRALCTEVGHGPRPTVIHV'
+    assert_equal output, Rosalind.splc(inputo)
+  end
 end
 
