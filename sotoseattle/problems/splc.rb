@@ -4,15 +4,15 @@ require_relative './prot'
 class Rosalind
 
   ## splc exercise == splice dna removing introns and converting to protein
-  def self.splc chucho
-    strands = fasta(chucho).values
-    dna_str = strands.shift
+  def self.splc input_data
+    dna_str, *introns = *fasta(input_data).values
 
-    strands.each do |intron|
-      dna_str = dna_str.split(intron).flatten.join
-    end
+    encode_protein(transcribe(splice_exons(dna_str, introns))).chomp(EOS)
+  end
 
-    encode_protein(transcribe dna_str).chomp(EOS)
+  def self.splice_exons dna_str, introns
+    introns.each { |x| dna_str = dna_str.split(x).join }
+    dna_str
   end
 
   class << self
