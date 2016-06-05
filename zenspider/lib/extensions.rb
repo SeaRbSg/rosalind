@@ -32,6 +32,10 @@ class String
     words.map(&:to_f)
   end
 
+  def each_slice
+    (0..length).map { |n| yield self[n..-1] }
+  end
+
   def each_cons n
     return enum_for(:each_cons, n) unless block_given?
     chars.each_cons(n) do |a|

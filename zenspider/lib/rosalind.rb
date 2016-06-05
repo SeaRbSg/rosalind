@@ -109,6 +109,12 @@ class Rosalind
     grep_protein prots, /N[^P][ST][^P]/
   end
 
+  def cmd_orf s
+    dna = fasta_string s
+
+    dna_to_prots(dna).uniq
+  end
+
   def cmd_perm s
     n = s.to_i
     p = 1.upto(n).to_a.permutation
@@ -204,6 +210,7 @@ class Rosalind
    END_RNA
 
   RNA_CODON = Hash[*rna_table.words]
+  DNA_CODON = Hash[*rna_table.tr("U", "T").words]
 
   def cache id
     path = "tmp/#{id}"
@@ -221,6 +228,17 @@ class Rosalind
 
   def count_dna dna
     DNA.keys.map { |nt| dna.count nt }
+  end
+
+  def dna_to_prot dna
+    dna.gsub(/.../, DNA_CODON)
+  end
+
+  def dna_to_prots dna
+    rdna = reverse_compliment dna
+    dna << "\n" << rdna
+
+    dna.each_slice { |s| dna_to_prot(s).scan(/^(M[^.\n]*)\./) }.flatten
   end
 
   def dna_to_rna dna
