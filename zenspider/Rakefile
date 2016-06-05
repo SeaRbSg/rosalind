@@ -1,0 +1,14 @@
+task :default => :run
+
+task :move do
+  files = Dir[File.expand_path("~/Downloads/rosalind_*.txt")]
+  mv files, "." unless files.empty?
+end
+
+task :run => :move do
+  files = Dir["rosalind_*.txt"]
+
+  files.each do |file|
+    sh "bin/rosalind #{file} | pbcopy"
+  end
+end
