@@ -48,6 +48,20 @@ class Rosalind
     gc fasta s
   end
 
+  def cmd_grph s
+    dnas = fasta s
+
+    h = HashHashArray.new
+
+    dnas.each do |k, v|
+      pre, suf = v[0,3], v[-3,3]
+      h[pre][:pre] << k
+      h[suf][:suf] << k
+    end
+
+    h.flat_map { |_, v| v[:suf].product v[:pre] }.reject(&:paireq).map(&:spc)
+  end
+
   def cmd_hamm s
     a, b = s.lines.map(&:chomp)
     hamm a, b

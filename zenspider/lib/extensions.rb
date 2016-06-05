@@ -51,8 +51,16 @@ class Array
     result
   end
 
+  def paireq
+    self[0] == self[1]
+  end
+
   def index_hash
     Hash[map.with_index.to_a]
+  end
+
+  def spc
+    join " "
   end
 
   def sort_by_dict ary
@@ -63,5 +71,23 @@ class Array
 
   def sum
     inject :+
+  end
+end
+
+class HashHash < Hash
+  def initialize
+    super { |h,k| h[k] = {} }
+  end
+end
+
+class HashArray < Hash
+  def initialize
+    super { |h,k| h[k] = [] }
+  end
+end
+
+class HashHashArray < Hash
+  def initialize
+    super { |h,k| h[k] = HashArray.new }
   end
 end
