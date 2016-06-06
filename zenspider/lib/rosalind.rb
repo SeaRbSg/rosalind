@@ -175,6 +175,12 @@ class Rosalind
     s.indicies(t).join " "
   end
 
+  def cmd_tree s
+    max, *edges = s.integers
+
+    max - (edges.size/2) - 1
+  end
+
   ##
   # Helpers
 
