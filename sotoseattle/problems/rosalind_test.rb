@@ -15,6 +15,7 @@ require_relative '../problems/revp.rb'
 
 require_relative '../problems/pmch.rb'
 require_relative '../problems/pper.rb'
+require_relative '../problems/tree.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -212,5 +213,13 @@ class TestRosalind < Minitest::Test
     assert_equal 587200, Rosalind.pper( "91 9")
   end
 
+  def test_tree_basic
+    assert_equal 3, Rosalind.tree( "10\n1 2\n2 8\n4 10\n5 9\n6 10\n7 9")
+  end
+
+  def test_tree_exercise
+    inputo = File.open('../test_data/rosalind_tree.txt').read
+    assert_equal 39, Rosalind.tree(inputo)
+  end
 end
 
