@@ -4,7 +4,6 @@ require 'minitest/pride'
 require_relative '../problems/fib.rb'
 require_relative '../problems/iev.rb'
 require_relative '../problems/fibd.rb'
-require_relative '../problems/mrna.rb'
 require_relative '../problems/prtm.rb'
 require_relative '../problems/mprt.rb'
 require_relative '../problems/cons.rb'
@@ -15,6 +14,7 @@ require_relative '../problems/perm.rb'
 require_relative '../problems/revp.rb'
 
 require_relative '../problems/pmch.rb'
+require_relative '../problems/pper.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -203,5 +203,14 @@ class TestRosalind < Minitest::Test
     output = 18172405820056795525404426240000000
     assert_equal output, Rosalind.pmch(inputo)
   end
+
+  def test_pper_basic
+    assert_equal 51200, Rosalind.pper( "21 7")
+  end
+
+  def test_pper_exercise
+    assert_equal 587200, Rosalind.pper( "91 9")
+  end
+
 end
 
