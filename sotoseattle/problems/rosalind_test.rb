@@ -6,7 +6,6 @@ require_relative '../problems/iev.rb'
 require_relative '../problems/fibd.rb'
 require_relative '../problems/mrna.rb'
 require_relative '../problems/prtm.rb'
-require_relative '../problems/grph.rb'
 require_relative '../problems/mprt.rb'
 require_relative '../problems/cons.rb'
 require_relative '../problems/orf.rb'
@@ -14,6 +13,8 @@ require_relative '../problems/splc.rb'
 require_relative '../problems/lcsm.rb'
 require_relative '../problems/perm.rb'
 require_relative '../problems/revp.rb'
+
+require_relative '../problems/pmch.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -191,6 +192,16 @@ class TestRosalind < Minitest::Test
     inputo = File.open('../test_data/rosalind_splc.txt').read
     output = 'MARPTPQPICLCQCERLCITIGHSILSPSDMSLHYDHHKEREPGISVGIKVPTTHGGTTLRQFFPPRVDDISLPNPSPLRSQLDHKELPQSAPLFMAASRCIVYLGLANSTERTSNRENVHNKSWDRTHTGCDSTPGTGFLTGPPYMAVVIRNPQMTILQLVLHWQGYRALCTEVGHGPRPTVIHV'
     assert_equal output, Rosalind.splc(inputo)
+  end
+
+  def test_pmch_basic
+    assert_equal 12, Rosalind.pmch( ">Rosalind_23\nAGCUAGUCAU")
+  end
+
+  def test_pmch_exercise
+    inputo = File.open('../test_data/rosalind_pmch.txt').read
+    output = 18172405820056795525404426240000000
+    assert_equal output, Rosalind.pmch(inputo)
   end
 end
 

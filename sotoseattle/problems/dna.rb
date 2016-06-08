@@ -14,7 +14,16 @@ class Rosalind
 
   ## Parse dna strings in FASTA format
   def self.fasta input_dna
-    Hash[input_dna.delete("\n").delete(" ").scan(/>(Rosalind_\d+)([AGCT]+)/)]
+    Hash[input_dna.delete("\n").delete(" ").scan(/>(Rosalind_\d+)([AGCTU]+)/)]
+  end
+
+  ## Factorial of a number
+  def self.facto n
+    if n == 0
+      1
+    else
+      n * facto(n - 1)
+    end
   end
 
 end
