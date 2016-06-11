@@ -153,6 +153,12 @@ class Rosalind
     dna_to_rna s
   end
 
+  def cmd_sseq s
+    dna, pat = fasta(s).values
+
+    indicies(dna, pat).join " "
+  end
+
   def cmd_sign s
     n = s.integers.first
 
@@ -298,6 +304,14 @@ class Rosalind
 
   def hamm a, b
     a.chars.zip(b.chars).count { |m, n| m != n }
+  end
+
+  def indicies s, p
+    idx = 0
+
+    p.chars.map { |c|
+      idx = s.index(c, idx) + 1
+    }
   end
 
   def profile s
