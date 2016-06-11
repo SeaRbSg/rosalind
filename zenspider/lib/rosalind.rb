@@ -181,6 +181,14 @@ class Rosalind
     s.indicies(t).join " "
   end
 
+  def cmd_tran s
+    s1, s2 = fasta(s).values
+
+    a, b = count_mutations s1, s2
+
+    a / b
+  end
+
   def cmd_tree s
     max, *edges = s.integers
 
@@ -240,6 +248,23 @@ class Rosalind
 
   def count_dna dna
     DNA.keys.map { |nt| dna.count nt }
+  end
+
+  def count_mutations s1, s2
+    transitions = 0.0
+    transversions = 0.0
+
+    s1.chars.zip(s2.chars).each do |c1, c2|
+      next if c1 == c2
+
+      if "#{c1}#{c2}" =~ /AG|GA|CT|TC/ then
+        transitions += 1
+      else
+        transversions += 1
+      end
+    end
+
+    [transitions, transversions]
   end
 
   def dna_to_prot dna
