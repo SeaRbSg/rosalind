@@ -8,7 +8,6 @@ require_relative '../problems/prtm.rb'
 require_relative '../problems/mprt.rb'
 require_relative '../problems/cons.rb'
 require_relative '../problems/orf.rb'
-require_relative '../problems/splc.rb'
 require_relative '../problems/lcsm.rb'
 require_relative '../problems/revp.rb'
 
@@ -17,6 +16,7 @@ require_relative '../problems/pper.rb'
 require_relative '../problems/tree.rb'
 require_relative '../problems/prob.rb'
 require_relative '../problems/lgis.rb'
+require_relative '../problems/tran.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -233,6 +233,18 @@ class TestRosalind < Minitest::Test
     inputo = File.open('../test_data/rosalind_prob.txt').read
     output = "-81.636 -74.244 -67.561 -65.318 -62.807 -61.224 -60.223 -60.521 -61.166 -62.312 -65.318 -66.807 -71.096 -78.764"
     assert_equal output, Rosalind.prob(inputo)
+  end
+
+  def test_tran_basic
+    inputo = ">Rosalind_0209\nGCAACGCACAACGAAAACCCTTAGGGACTGGATTATTTCGTGATCGTTGTAGTTATTGGA\nAGTACGGGCATCAACCCAGTT\n>Rosalind_2200\nTTATCTGACAAAGAAAGCCGTCAACGGCTGGATAATTTCGCGATCGTGCTGGTTACTGGC\nGGTACGAGTGTTCCTTTGGGT"
+    output = 1.21428571429
+    assert_in_delta output, Rosalind.tran(inputo), 0.0001
+  end
+
+  def test_tran_basic
+    inputo = File.open('../test_data/rosalind_tran.txt').read
+    output = 2.1666666666666665
+    assert_in_delta output, Rosalind.tran(inputo), 0.0001
   end
 
 end
