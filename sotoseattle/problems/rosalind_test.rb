@@ -10,12 +10,13 @@ require_relative '../problems/cons.rb'
 require_relative '../problems/orf.rb'
 require_relative '../problems/splc.rb'
 require_relative '../problems/lcsm.rb'
-require_relative '../problems/perm.rb'
 require_relative '../problems/revp.rb'
 
 require_relative '../problems/pmch.rb'
 require_relative '../problems/pper.rb'
 require_relative '../problems/tree.rb'
+require_relative '../problems/prob.rb'
+require_relative '../problems/lgis.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -221,5 +222,18 @@ class TestRosalind < Minitest::Test
     inputo = File.open('../test_data/rosalind_tree.txt').read
     assert_equal 39, Rosalind.tree(inputo)
   end
+
+  def test_prob_basic
+    inputo = "ACGATACAA\n0.129 0.287 0.423 0.476 0.641 0.742 0.783"
+    output = "-5.737 -5.217 -5.263 -5.36 -5.958 -6.628 -7.009"
+    assert_equal output, Rosalind.prob(inputo)
+  end
+
+  def test_prob_exercise
+    inputo = File.open('../test_data/rosalind_prob.txt').read
+    output = "-81.636 -74.244 -67.561 -65.318 -62.807 -61.224 -60.223 -60.521 -61.166 -62.312 -65.318 -66.807 -71.096 -78.764"
+    assert_equal output, Rosalind.prob(inputo)
+  end
+
 end
 
