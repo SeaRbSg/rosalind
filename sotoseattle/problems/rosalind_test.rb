@@ -17,6 +17,7 @@ require_relative '../problems/tree.rb'
 require_relative '../problems/prob.rb'
 require_relative '../problems/lgis.rb'
 require_relative '../problems/tran.rb'
+require_relative '../problems/lexf.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -246,6 +247,23 @@ class TestRosalind < Minitest::Test
     output = 2.1666666666666665
     assert_in_delta output, Rosalind.tran(inputo), 0.0001
   end
+
+  def test_lexf_basic
+    inputo = "T A G C\n2"
+    output = "TT\nTA\nTG\nTC\nAT\nAA\nAG\nAC\nGT\nGA\nGG\nGC\nCT\nCA\nCG\nCC"
+    assert_equal output, Rosalind.lexf(inputo)
+  end
+
+  def test_lexf_exercise
+    inputo = File.open('../test_data/rosalind_lexf.txt').read
+    output = File.open('../test_data/sol_lexf.txt').read.strip
+
+    sol = Rosalind.lexf(inputo)
+    # File.open("../test_data/sol_lexf2.txt", 'w') { |file| file.write(sol) }
+    assert_equal output, sol
+  end
+
+
 
 end
 
