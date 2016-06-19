@@ -18,6 +18,7 @@ require_relative '../problems/prob.rb'
 require_relative '../problems/lgis.rb'
 require_relative '../problems/tran.rb'
 require_relative '../problems/lexf.rb'
+require_relative '../problems/sign.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -263,7 +264,15 @@ class TestRosalind < Minitest::Test
     assert_equal output, sol
   end
 
+  def test_sign_basic
+    output = "8\n-1 -2\n-1 2\n1 -2\n1 2\n-2 -1\n-2 1\n2 -1\n2 1"
+    assert_equal output.split("\n").sort, Rosalind.sign(2).split("\n").sort
+  end
 
+  def test_sign_exercise
+    output = File.open('../test_data/sol_sign.txt').read
+    assert_equal output.split("\n").sort, Rosalind.sign(4).split("\n").sort
+  end
 
 end
 
