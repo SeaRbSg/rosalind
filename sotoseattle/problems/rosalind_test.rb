@@ -19,6 +19,7 @@ require_relative '../problems/lgis.rb'
 require_relative '../problems/tran.rb'
 require_relative '../problems/lexf.rb'
 require_relative '../problems/sign.rb'
+require_relative '../problems/sseq.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -288,5 +289,25 @@ class TestRosalind < Minitest::Test
   #   # assert_equal output, Rosalind.lgis(inputo)
   # end
 
-end
+  def test_sseq_basic
+    inputo = ">Rosalind_14\nACGTACGTGACG\n>Rosalind_18\nGTA"
+    assert_equal "3 4 5", Rosalind.sseq(inputo)
+  end
 
+  def test_sseq_partial_find
+    inputo = ">Rosalind_14\nACGTCGTGCG\n>Rosalind_18\nGTA"
+    refute Rosalind.sseq(inputo)
+  end
+
+  def test_sseq_no_find
+    inputo = ">Rosalind_14\nACCCCCCCCC\n>Rosalind_18\nGTA"
+    refute Rosalind.sseq(inputo)
+  end
+
+  def test_sseq_exercise
+    inputo = File.open('../test_data/rosalind_sseq.txt').read
+    output = File.open('../test_data/sol_sseq.txt').read.strip
+    assert_equal output, Rosalind.sseq(inputo)
+  end
+
+end
