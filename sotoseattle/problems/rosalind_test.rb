@@ -274,5 +274,19 @@ class TestRosalind < Minitest::Test
     assert_equal output.split("\n").sort, Rosalind.sign(4).split("\n").sort
   end
 
+  def test_lgis_basic
+    inputo = "9\n8 2 1 6 5 7 4 3 9"
+    # inputo = "5\n2 1 4 3 5"
+    output = "2 6 7 9\n8 6 5 4 3"
+    assert_equal output, Rosalind.lgis(inputo)
+  end
+
+  # def test_lgis_exercise
+  #   inputo = File.open('../test_data/rosalind_lgis.txt').read
+  #   output = File.open('../test_data/sol_lgis.txt').read
+  #   Rosalind.lgis(inputo)
+  #   # assert_equal output, Rosalind.lgis(inputo)
+  # end
+
 end
 
