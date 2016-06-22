@@ -22,6 +22,8 @@ require_relative '../problems/sign.rb'
 require_relative '../problems/sseq.rb'
 require_relative '../problems/long.rb'
 
+require_relative '../problems/inod.rb'
+
 class TestRosalind < Minitest::Test
 
   def test_dna
@@ -347,6 +349,12 @@ class TestRosalind < Minitest::Test
     kk = Rosalind.long(inputo)
     p kk.size
     # assert_equal output, kk
+  end
+
+  def test_inod_basic
+    assert_equal 6, Rosalind.inod(8)
+    assert_equal 4, Rosalind.inod(6)
+    assert_equal 2, Rosalind.inod(4)
   end
 
 end
