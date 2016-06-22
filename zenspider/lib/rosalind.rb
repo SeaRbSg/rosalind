@@ -97,6 +97,14 @@ class Rosalind
     a.sort_by_dict d
   end
 
+  def cmd_lgis s
+    max, *ary = s.integers
+
+    a = lgis(ary).join " "
+    b = lgis(ary.reverse).reverse.join " "
+    [a, b]
+  end
+
   def cmd_mrna s
     counts = RNA_CODON.values.counts
 
@@ -337,6 +345,38 @@ class Rosalind
     p.chars.map { |c|
       idx = s.index(c, idx) + 1
     }
+  end
+
+  def lgis ary
+    #  * Dynamic Programming is used to solve this question. DP equation is
+    #  * if(arr[i] > arr[j]) { T[i] = max(T[i], T[j] + 1 }
+
+    len = Array.new ary.size, 1
+    sol = (0...ary.size).to_a
+
+    (1...ary.size).each do |i|
+      (0...i).each do |j|
+        if ary[i] > ary[j] then
+          if len[j]+1 > len[i] then
+            len[i] = len[j] + 1
+            sol[i] = j
+          end
+        end
+      end
+    end
+
+    max = (0...len.size).max_by { |n| len[n] }
+
+    new_t = t_idx = max
+
+    a = []
+    begin
+      t_idx = new_t
+      a.unshift ary[t_idx]
+      new_t = sol[t_idx]
+    end while t_idx != new_t
+
+    a
   end
 
   def profile s
