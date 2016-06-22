@@ -11,6 +11,7 @@ require_relative '../problems/orf.rb'
 require_relative '../problems/lcsm.rb'
 require_relative '../problems/revp.rb'
 
+require_relative '../problems/tree.rb'
 require_relative '../problems/pmch.rb'
 require_relative '../problems/pper.rb'
 require_relative '../problems/prob.rb'
@@ -23,6 +24,7 @@ require_relative '../problems/long.rb'
 
 require_relative '../problems/inod.rb'
 require_relative '../problems/sset.rb'
+require_relative '../problems/seto.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -360,6 +362,18 @@ class TestRosalind < Minitest::Test
   def test_sset_basic
     assert_equal 8, Rosalind.sset(3)
     assert_equal 639424, Rosalind.sset(970)
+  end
+
+  def test_seto_basic
+    inputo = "10\n{1, 2, 3, 4, 5}\n{2, 8, 5, 10}"
+    output = "{1, 2, 3, 4, 5, 8, 10}\n{2, 5}\n{1, 3, 4}\n{8, 10}\n{6, 7, 8, 9, 10}\n{1, 3, 4, 6, 7, 9}"
+    assert_equal output, Rosalind.seto(inputo)
+  end
+
+  def test_seto_exercise
+    inputo = File.open('../test_data/rosalind_seto.txt').read
+    output = File.open('../test_data/sol_seto.txt').read.strip
+    assert_equal output, Rosalind.seto(inputo)
   end
 
 end
