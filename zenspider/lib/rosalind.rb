@@ -67,6 +67,12 @@ class Rosalind
     hamm a, b
   end
 
+  def cmd_inod s
+    n = s.integers.first
+
+    n - 2
+  end
+
   def cmd_iprb s
     k, m, n = s.integers
     recessive k, m, n
