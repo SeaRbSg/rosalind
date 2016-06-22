@@ -20,6 +20,7 @@ require_relative '../problems/tran.rb'
 require_relative '../problems/lexf.rb'
 require_relative '../problems/sign.rb'
 require_relative '../problems/sseq.rb'
+require_relative '../problems/long.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -257,6 +258,7 @@ class TestRosalind < Minitest::Test
   end
 
   def test_lexf_exercise
+    skip
     inputo = File.open('../test_data/rosalind_lexf.txt').read
     output = File.open('../test_data/sol_lexf.txt').read.strip
 
@@ -276,18 +278,19 @@ class TestRosalind < Minitest::Test
   end
 
   def test_lgis_basic
+    skip
     inputo = "9\n8 2 1 6 5 7 4 3 9"
-    # inputo = "5\n2 1 4 3 5"
     output = "2 6 7 9\n8 6 5 4 3"
     assert_equal output, Rosalind.lgis(inputo)
   end
 
-  # def test_lgis_exercise
-  #   inputo = File.open('../test_data/rosalind_lgis.txt').read
-  #   output = File.open('../test_data/sol_lgis.txt').read
-  #   Rosalind.lgis(inputo)
-  #   # assert_equal output, Rosalind.lgis(inputo)
-  # end
+  def test_lgis_exercise
+    skip
+    inputo = File.open('../test_data/rosalind_lgis.txt').read
+    output = File.open('../test_data/sol_lgis.txt').read
+    Rosalind.lgis(inputo)
+    # assert_equal output, Rosalind.lgis(inputo)
+  end
 
   def test_sseq_basic
     inputo = ">Rosalind_14\nACGTACGTGACG\n>Rosalind_18\nGTA"
@@ -295,11 +298,13 @@ class TestRosalind < Minitest::Test
   end
 
   def test_sseq_partial_find
+    skip
     inputo = ">Rosalind_14\nACGTCGTGCG\n>Rosalind_18\nGTA"
     refute Rosalind.sseq(inputo)
   end
 
   def test_sseq_no_find
+    skip
     inputo = ">Rosalind_14\nACCCCCCCCC\n>Rosalind_18\nGTA"
     refute Rosalind.sseq(inputo)
   end
@@ -308,6 +313,40 @@ class TestRosalind < Minitest::Test
     inputo = File.open('../test_data/rosalind_sseq.txt').read
     output = File.open('../test_data/sol_sseq.txt').read.strip
     assert_equal output, Rosalind.sseq(inputo)
+  end
+
+
+
+
+
+
+
+  def test_common_concat
+    assert_equal ["caracola", "carac"], Rosalind.common_concat("caracola", "carac")
+    assert_equal ["AGACCTGCCGGAA", "CCTGCCGGAA"], Rosalind.common_concat("AGACCTGCCG", "CCTGCCGGAA")
+    assert_equal ["caracolacao", "colacao"], Rosalind.common_concat("caracola", "colacao")
+    assert_equal ["caracolacacao", "cacao"], Rosalind.common_concat("caracola", "cacao")
+    assert_equal ["caracolaxxxxxxxxxxcacao", "xxxxxxxxxxcacao"], Rosalind.common_concat("caracola", "xxxxxxxxxxcacao")
+    assert_equal ["cacaracola", "caracola"], Rosalind.common_concat("caracola", "cacara")
+  end
+
+  def test_long_laundro
+    assert_equal "AGACCTGCCGGAA", Rosalind.long_laundro(["AGACCTGCCG", "CCTGCCGGAA"])
+  end
+
+  def test_long_basic
+    inputo = ">Rosalind_56\nATTAGACCTG\n>Rosalind_57\nCCTGCCGGAA\n>Rosalind_58\nAGACCTGCCG\n>Rosalind_59\nGCCGGAATAC"
+    assert_equal "ATTAGACCTGCCGGAATAC", Rosalind.long(inputo)
+  end
+
+  def test_long_exercise
+    skip
+    inputo = File.open('../test_data/rosalind_long.txt').read
+    output = File.open('../test_data/sol_long.txt').read.strip
+    p output.size
+    kk = Rosalind.long(inputo)
+    p kk.size
+    # assert_equal output, kk
   end
 
 end
