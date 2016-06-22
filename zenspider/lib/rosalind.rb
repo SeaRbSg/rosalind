@@ -161,6 +161,16 @@ class Rosalind
     dna_to_rna s
   end
 
+  def cmd_seto s
+    n, a, b = s.delete("{}").lines
+    n = n.to_i
+    a = a.integers
+    b = b.integers
+    s = (1..n).to_a
+
+    [a | b, a & b, a - b, b - a, s - a, s - b].map(&:to_str_mathy)
+  end
+
   def cmd_sseq s
     dna, pat = fasta(s).values
 

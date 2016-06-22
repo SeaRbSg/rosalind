@@ -76,6 +76,10 @@ class Array
   def sum
     inject :+
   end
+
+  def to_str_mathy
+    "{#{join ", "}}"
+  end
 end
 
 class HashHash < Hash
