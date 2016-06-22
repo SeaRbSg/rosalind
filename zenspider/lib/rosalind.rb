@@ -167,6 +167,12 @@ class Rosalind
     indicies(dna, pat).join " "
   end
 
+  def cmd_sset s
+    n = s.integers.first
+
+    (2 ** n) % 1_000_000
+  end
+
   def cmd_sign s
     n = s.integers.first
 
