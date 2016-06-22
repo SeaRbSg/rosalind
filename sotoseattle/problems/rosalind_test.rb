@@ -13,7 +13,6 @@ require_relative '../problems/revp.rb'
 
 require_relative '../problems/pmch.rb'
 require_relative '../problems/pper.rb'
-require_relative '../problems/tree.rb'
 require_relative '../problems/prob.rb'
 require_relative '../problems/lgis.rb'
 require_relative '../problems/tran.rb'
@@ -23,6 +22,7 @@ require_relative '../problems/sseq.rb'
 require_relative '../problems/long.rb'
 
 require_relative '../problems/inod.rb'
+require_relative '../problems/sset.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -355,6 +355,11 @@ class TestRosalind < Minitest::Test
     assert_equal 6, Rosalind.inod(8)
     assert_equal 4, Rosalind.inod(6)
     assert_equal 2, Rosalind.inod(4)
+  end
+
+  def test_sset_basic
+    assert_equal 8, Rosalind.sset(3)
+    assert_equal 639424, Rosalind.sset(970)
   end
 
 end
