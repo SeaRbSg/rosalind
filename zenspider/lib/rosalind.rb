@@ -4,6 +4,7 @@ class Rosalind
   def run args
     ARGV.each do |path|
       name = path.split(/[_.]/)[1]
+      name = File.basename path, ".txt" if name.empty?
       warn "# #{name}: #{path}"
       puts send("cmd_#{name}", parse(File.read(path)))
     end
