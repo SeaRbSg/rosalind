@@ -136,6 +136,14 @@ class Rosalind
     [p.size, p.map { |a| a.join " " }]
   end
 
+  def cmd_pmch s
+    rna = fasta_string s
+
+    count = count_chars(rna)
+
+    count["A"].fact * count["G"].fact
+  end
+
   def cmd_pper s
     m, n = s.integers
 
@@ -276,6 +284,11 @@ class Rosalind
   def consensus profile
     profile.map { |h| h.max_by(&:last) }.map(&:first).join
   end
+
+  def count_chars s
+    Hash[s.chars.group_by(&:itself).map { |k, v| [k, v.size] }]
+  end
+  # TODO: refactor count_dna to use count_chars?
 
   def count_dna dna
     DNA.keys.map { |nt| dna.count nt }
