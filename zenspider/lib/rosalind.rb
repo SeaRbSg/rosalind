@@ -112,6 +112,16 @@ class Rosalind
     [a, b]
   end
 
+  def cmd_long s
+    candidates = fasta(s).values
+
+    candidates.flat_map.with_index { |first, i|
+      warn "%d/%d" % [i+1, candidates.size]
+      rest = candidates-[first]
+      find_joins first, rest
+    }.compact
+  end
+
   def cmd_mrna s
     counts = RNA_CODON.values.counts
 
@@ -351,6 +361,20 @@ class Rosalind
       a = [a[1..-1].sum] + a[0..-2]
     end
     a.sum
+  end
+
+  def find_joins first, rest
+    return first if rest.empty?
+
+    rest.flat_map { |str|
+      min = str.size / 2
+      max = str.size - 1
+      substrs = max.downto(min).map { |len| str[0..len] }
+
+      found = substrs.find { |substr| first.end_with? substr }
+
+      find_joins first+str[found.size..-1], rest-[str] if found
+    }
   end
 
   def gc fasta
