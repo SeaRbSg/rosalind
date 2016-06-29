@@ -60,13 +60,12 @@
 # AAN
 
 require 'pp'
-require 'pry'
 
 alphabet, size = File.read("lexv.txt").split("\n")
 size           = size.to_i
 alphabet       = alphabet.split(" ")
-$ordering       = Hash[alphabet.zip(0..(alphabet.size))]
-$ordering[nil]  = -1
+$ordering      = Hash[alphabet.zip(0..(alphabet.size))]
+$ordering[nil] = -1
 
 def lexo x, y
   max = [x.length, y.length].max
@@ -83,11 +82,7 @@ def lexo x, y
   0
 end
 
-results = []
-
-(1..size).each do |n|
-  results += alphabet.repeated_permutation(n).to_a
-end
+results = (1..size).flat_map { |n| alphabet.repeated_permutation(n).to_a }
 
 results = results.sort { |x, y| lexo(x, y) }
 
