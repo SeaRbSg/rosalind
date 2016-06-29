@@ -160,6 +160,12 @@ class Rosalind
     m.p(n) % 1_000_000
   end
 
+  def cmd_prob s
+    dna, *probs = s.words
+
+    prob(dna, probs.map(&:to_f)).map { |f| "%.3f" % f }.join " "
+  end
+
   def cmd_prot s
     rna_to_prot s
   end
@@ -437,6 +443,19 @@ class Rosalind
     end while t_idx != new_t
 
     a
+  end
+
+  def prob dna, probs
+    a, c, g, t = count_dna dna
+    cg = c + g
+    at = a + t
+
+    probs.map { |p|
+      m, n = p / 2, (1-p) / 2
+
+      # log(m * n) == log(m) + log(n)
+      Math.log10(m ** cg) + Math.log10(n ** at)
+    }
   end
 
   def profile s
