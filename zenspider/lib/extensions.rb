@@ -5,7 +5,14 @@ class Integer
     n.fact / (n-m).fact
   end
 
+  def c m
+    n = self
+
+    n.fact / (m.fact * (n-m).fact)
+  end
+
   def fact
+    return 1 if self < 2
     self.downto(2).inject(&:*)
   end
 end

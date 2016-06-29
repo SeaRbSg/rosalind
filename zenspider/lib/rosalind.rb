@@ -112,6 +112,14 @@ class Rosalind
     [a, b]
   end
 
+  def cmd_lia s
+    m, n = s.integers
+
+    m = 2**m
+
+    (n..m).inject(0.0) { |r, i| r + m.c(i) * 0.25**i * 0.75**(m - i) }
+  end
+
   def cmd_long s
     candidates = fasta(s).values
 
