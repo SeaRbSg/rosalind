@@ -257,18 +257,19 @@ class TestRosalind < Minitest::Test
 
   def test_lexf_basic
     inputo = "T A G C\n2"
-    output = "TT\nTA\nTG\nTC\nAT\nAA\nAG\nAC\nGT\nGA\nGG\nGC\nCT\nCA\nCG\nCC"
+    output = "TT\nTA\nTG\nTC\nAT\nAA\nAG\nAC\nGT\nGA\nGG\nGC\nCT\nCA\nCG\nCC\n"
     assert_equal output, Rosalind.lexf(inputo)
   end
 
   def test_lexf_exercise
-    skip
-    inputo = File.open('../test_data/rosalind_lexf.txt').read
-    output = File.open('../test_data/sol_lexf.txt').read.strip
+    inputo = File.open('../test_data/lexf.txt').read
+    output = File.open('../test_data/lexf_results.txt').read
 
     sol = Rosalind.lexf(inputo)
-    # File.open("../test_data/sol_lexf2.txt", 'w') { |file| file.write(sol) }
-    assert_equal output, sol
+    File.open("../test_data/sol_lexf.txt", 'w') { |f| f.write(sol) }
+    out = File.open("../test_data/sol_lexf.txt").read
+
+    assert_equal output, out
   end
 
   def test_sign_basic

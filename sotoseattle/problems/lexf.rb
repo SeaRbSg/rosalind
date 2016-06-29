@@ -4,12 +4,10 @@ class Rosalind
 
   def self.lexf inputo
     a, b = inputo.split("\n")
-    alpha, n = a.split, b.to_i
+    alpha = a.split(" ")
+    n = b.to_i
 
-    alpha.repeated_permutation(n).map(&:join).join("\n")
-
-    # unnecessary
-    # .sort_by { |a, b| alpha.index(a) <=> alpha.index(b) }
+    alpha.repeated_permutation(n).map(&:join).join("\n") + "\n"
   end
 
 end
