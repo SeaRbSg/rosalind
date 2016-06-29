@@ -19,7 +19,6 @@
 # prefix of another in the collection (this would cause the first
 # string to be encoded as a path terminating at an internal node).
 
-
 # Given:
 # A list of at most 100 DNA strings of length at most 100 bp, none of
 # which is a prefix of another.
@@ -50,18 +49,65 @@
 # 8 9 A
 # 9 10 T
 
+require 'pry'
+
 class Node
   attr_accessor :children
+  attr_accessor :number
+  attr_accessor :trie
 
-  def initialize
-    children = []
+  def initialize trie, num
+    @number = num
+    @trie = trie
+    @children = {}
+  end
+
+  def insert str
+    c = str[0]
+
+    unless self.children[c] then
+      @children[c] = Node.new @trie, @trie.next_number
+      @trie.next_number += 1
+    end
+
+    @children[c].insert str[1..-1] if str.length > 1
+  end
+
+  def to_s
+    s = ""
+    children.each do |k, v|
+      s += "#{self.number} #{v.number} #{k}\n"
+      s += v.to_s
+    end
+    s
   end
 end
 
 class Trie
   attr_accessor :root
+  attr_accessor :next_number
 
   def initialize
-    root = Node.new
+    @next_number = 1
+    @root = Node.new self, @next_number
+    @next_number += 1
+  end
+
+  def insert str
+    @root.insert str
+  end
+
+  def to_s
+    @root.to_s
   end
 end
+
+trie = Trie.new
+
+strs = File.read("trie.txt").strip.split("\n")
+
+strs.each do |str|
+  trie.insert str
+end
+
+puts trie
