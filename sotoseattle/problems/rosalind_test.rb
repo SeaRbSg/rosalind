@@ -26,7 +26,8 @@ require_relative '../problems/long.rb'
 require_relative '../problems/inod.rb'
 require_relative '../problems/sset.rb'
 require_relative '../problems/seto.rb'
-require_relative '../problems/pdst.rb'
+require_relative '../problems/rstr.rb'
+require_relative '../problems/rstr.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -395,6 +396,16 @@ class TestRosalind < Minitest::Test
     inputo = File.open('../test_data/rosalind_pdst.txt').read
     output = File.open('../test_data/sol_pdst.txt').read.strip
     assert_equal output, Rosalind.pdst(inputo)
+  end
+
+  def test_rstr_basic
+    inputo = "90000 0.6\nATAGCCGA"
+    assert_equal 0.689, Rosalind.rstr(inputo)
+  end
+
+  def test_rstr_exercise
+    inputo = File.open('../test_data/rosalind_rstr.txt').read
+    assert_equal 0.2818469323229993, Rosalind.rstr(inputo)
   end
 
 end
