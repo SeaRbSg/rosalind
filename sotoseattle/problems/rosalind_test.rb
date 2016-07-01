@@ -25,6 +25,7 @@ require_relative '../problems/long.rb'
 require_relative '../problems/inod.rb'
 require_relative '../problems/sset.rb'
 require_relative '../problems/seto.rb'
+require_relative '../problems/pdst.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -374,6 +375,22 @@ class TestRosalind < Minitest::Test
     inputo = File.open('../test_data/rosalind_seto.txt').read
     output = File.open('../test_data/sol_seto.txt').read.strip
     assert_equal output, Rosalind.seto(inputo)
+  end
+
+  def test_pdst_distance
+    assert_equal 0.4, Rosalind.pdist("TTTCCATTTA", "GATTCATTTC")
+  end
+
+  def test_pdst_basic
+    inputo = ">Rosalind_9499\nTTTCCATTTA\n>Rosalind_0942\nGATTCATTTC\n>Rosalind_6568\nTTTCCATTTT\n>Rosalind_1833\nGTTCCATTTA"
+    output = "0.0 0.4 0.1 0.1\n0.4 0.0 0.4 0.3\n0.1 0.4 0.0 0.2\n0.1 0.3 0.2 0.0"
+    assert_equal output, Rosalind.pdst(inputo)
+  end
+
+  def test_pdst_exercise
+    inputo = File.open('../test_data/rosalind_pdst.txt').read
+    output = File.open('../test_data/sol_pdst.txt').read.strip
+    assert_equal output, Rosalind.pdst(inputo)
   end
 
 end
