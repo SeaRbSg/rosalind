@@ -335,8 +335,11 @@ class TestRosalind < Minitest::Test
     assert_equal ["cacaracola", "caracola"], Rosalind.common_concat("caracola", "cacara")
   end
 
-  def test_long_laundro
-    assert_equal "AGACCTGCCGGAA", Rosalind.long_laundro(["AGACCTGCCG", "CCTGCCGGAA"])
+  def test_long_comparison
+    assert_equal "AGACCTGCCGGAA", Rosalind.velcro("AGACCTGCCG", "CCTGCCGGAA")
+    assert_equal "AGACCTGCCGGAA", Rosalind.velcro("CCTGCCGGAA", "AGACCTGCCG")
+    assert_equal "ATTAGACCTGCCGGAATAC", Rosalind.velcro("AGACCTGCCGGAATAC", "ATTAGACCTG")
+    refute Rosalind.velcro("AGACCTGCCG", "TTTTTCGGAA")
   end
 
   def test_long_basic
@@ -345,13 +348,9 @@ class TestRosalind < Minitest::Test
   end
 
   def test_long_exercise
-    skip
     inputo = File.open('../test_data/rosalind_long.txt').read
     output = File.open('../test_data/sol_long.txt').read.strip
-    p output.size
-    kk = Rosalind.long(inputo)
-    p kk.size
-    # assert_equal output, kk
+    assert_equal output, Rosalind.long(inputo)
   end
 
   def test_inod_basic

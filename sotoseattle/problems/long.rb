@@ -3,65 +3,27 @@ require_relative './grph'
 class Rosalind
 
   def self.long inputo
-    feed = fasta(inputo).values
-    long_laundro(feed)
+    amalgamator fasta(inputo).values
   end
 
-  def self.xxx strands
-    return false if strands.size == 1
-    sol = []
-    tot = 1_000_000
-    strands.each do |base|
-      pepe = strands - [base]
-      to_add, to_rmv = pepe.map { |s| common_concat(base, s) }.min { |a| a.first.size }
-      if to_add.size < tot
-        tot = to_add.size
-        sol = pepe + [to_add] - [to_rmv]
+  def self.amalgamator strands, composite = nil
+    return composite if strands.size == 0
+
+    h = composite || strands.pop
+
+    strands.each do |l|
+      if composite = velcro(h, l)
+        strands.delete(l)
+        return amalgamator(strands, composite)
       end
     end
-    sol
   end
 
-  def self.long_laundro strands
-    return strands.first if strands.size == 1
-    while juan = xxx(strands) do
-      # p strands
-      strands = juan
-    end
-    strands.first
-  end
-
-  def self.common_concat s, t
-    st, ts= concat(s, t), concat(t, s)
-    st.size > ts.size ? [ts, s] : [st, t]
-  end
-
-  def self.concat s, t
-    if t.size < s.size && (sol = concat_inside(s, t))
-      return sol
-    elsif (sol = concat_tailed(s, t))
-      return sol
-    else
-      s + t
-    end
-  end
-
-  def self.concat_inside s, t
-    z = s.size
-    q = t.size
-    (0..z-q-1).each do |i|
-      return s if s.slice(i,q) == t
-    end
-    nil
-  end
-
-  def self.concat_tailed s, t
-    z = s.size
-    q = t.size
-    (1..[z, q].min).to_a.reverse.each do |i|
-      if s[-i..-1] == t[0..i-1]
-        return (s[0..(z-i-1)] + t)
-      end 
+  def self.velcro(hook_s, loop_s)
+    zh, zl   = hook_s.size, loop_s.size
+    (zl/2..zl).to_a.each do |i|
+      return hook_s + loop_s[i..-1] if loop_s.slice(0, i) == hook_s[zh-i..-1]
+      return loop_s + hook_s[i..-1] if hook_s.slice(0, i) == loop_s[zl-i..-1]
     end
     nil
   end
