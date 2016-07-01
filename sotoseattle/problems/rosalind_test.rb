@@ -10,6 +10,7 @@ require_relative '../problems/cons.rb'
 require_relative '../problems/orf.rb'
 require_relative '../problems/lcsm.rb'
 require_relative '../problems/revp.rb'
+require_relative '../problems/lia.rb'
 
 require_relative '../problems/tree.rb'
 require_relative '../problems/pmch.rb'
@@ -104,6 +105,14 @@ class TestRosalind < Minitest::Test
   def test_mrna_exercise
     i = File.new('../test_data/rosalind_mrna.txt').read
     assert_equal 770624, Rosalind.mrna(i)
+  end
+
+  def test_lia_basic
+    assert_equal 0.684, Rosalind.lia(2, 1)
+  end
+
+  def test_lia_example
+    assert_equal 0.374, Rosalind.lia(7, 34)
   end
 
   def test_prtm
@@ -321,13 +330,8 @@ class TestRosalind < Minitest::Test
     assert_equal output, Rosalind.sseq(inputo)
   end
 
-
-
-
-
-
-
   def test_common_concat
+    skip
     assert_equal ["caracola", "carac"], Rosalind.common_concat("caracola", "carac")
     assert_equal ["AGACCTGCCGGAA", "CCTGCCGGAA"], Rosalind.common_concat("AGACCTGCCG", "CCTGCCGGAA")
     assert_equal ["caracolacao", "colacao"], Rosalind.common_concat("caracola", "colacao")
