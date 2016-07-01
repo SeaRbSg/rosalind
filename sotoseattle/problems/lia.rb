@@ -8,16 +8,7 @@ class Rosalind
   end
 
   def self.aja_math m, i
-    0.25 ** i *
-    0.75 ** (m - i) *
-    factorial(m) /
-    factorial(i) /
-    factorial(m - i)
-  end
-
-  def self.factorial n
-    return 1 if n < 2
-    n.downto(2).reduce(:*)
+    0.25 ** i * 0.75 ** (m - i) * facto(m) / facto(i) / facto(m - i)
   end
 
 end
