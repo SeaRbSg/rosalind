@@ -28,6 +28,7 @@ require_relative '../problems/sset.rb'
 require_relative '../problems/seto.rb'
 require_relative '../problems/rstr.rb'
 require_relative '../problems/kmp.rb'
+require_relative '../problems/corr.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -417,6 +418,17 @@ class TestRosalind < Minitest::Test
     inputo = File.open('../test_data/rosalind_kmp.txt').read
     output = File.open('../test_data/sol_kmp.txt').read
     assert_equal output, Rosalind.kmp(inputo)
+  end
+
+  def test_corr_basic
+    inputo = ">Rosalind_52\nTCATC\n>Rosalind_44\nTTCAT\n>Rosalind_68\nTCATC\n>Rosalind_28\nTGAAA\n>Rosalind_95\nGAGGA\n>Rosalind_66\nTTTCA\n>Rosalind_33\nATCAA\n>Rosalind_21\nTTGAT\n>Rosalind_18\nTTTCC"
+    assert_equal "TTCAT->TTGAT\nGAGGA->GATGA\nTTTCC->TTTCA", Rosalind.corr(inputo)
+  end
+
+  def test_corr_exercise
+    inputo = File.open('../test_data/rosalind_corr.txt').read
+    output = File.open('../test_data/sol_corr.txt').read
+    assert_equal output, Rosalind.corr(inputo)
   end
 
 end

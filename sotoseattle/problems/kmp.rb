@@ -7,7 +7,7 @@ class Rosalind
     failure = Array.new(strand.size, 0)
 
     (1...strand.size).each do |i|
-      kk = subs(strand, strand[0,i]) - [1]
+      kk = find_substrand(strand, strand[0,i]) - [1]
       kk.each { |x| failure[x-2+i] = i }
     end
 
