@@ -27,7 +27,7 @@ require_relative '../problems/inod.rb'
 require_relative '../problems/sset.rb'
 require_relative '../problems/seto.rb'
 require_relative '../problems/rstr.rb'
-require_relative '../problems/rstr.rb'
+require_relative '../problems/kmp.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -406,6 +406,17 @@ class TestRosalind < Minitest::Test
   def test_rstr_exercise
     inputo = File.open('../test_data/rosalind_rstr.txt').read
     assert_equal 0.2818469323229993, Rosalind.rstr(inputo)
+  end
+
+  def test_kmp_basic
+    inputo = ">Rosalind_87\nCAGCATGGTATCACAGCAGAG"
+    assert_equal "0 0 0 1 2 0 0 0 0 0 0 1 2 1 2 3 4 5 3 0 0", Rosalind.kmp(inputo)
+  end
+
+  def test_kmp_exercise
+    inputo = File.open('../test_data/rosalind_kmp.txt').read
+    output = File.open('../test_data/sol_kmp.txt').read
+    assert_equal output, Rosalind.kmp(inputo)
   end
 
 end
