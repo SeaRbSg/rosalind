@@ -19,7 +19,7 @@ class Rosalind
 
   ## Factorial of a number
   def self.facto n
-    if n == 0
+    if n <= 0
       1
     else
       n * facto(n - 1)

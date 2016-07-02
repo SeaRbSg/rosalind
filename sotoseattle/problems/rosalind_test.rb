@@ -29,6 +29,8 @@ require_relative '../problems/seto.rb'
 require_relative '../problems/rstr.rb'
 require_relative '../problems/kmp.rb'
 require_relative '../problems/corr.rb'
+require_relative '../problems/pdst.rb'
+require_relative '../problems/mmch.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -401,7 +403,7 @@ class TestRosalind < Minitest::Test
 
   def test_rstr_basic
     inputo = "90000 0.6\nATAGCCGA"
-    assert_equal 0.689, Rosalind.rstr(inputo)
+    assert_equal 0.689, Rosalind.rstr(inputo).round(3)
   end
 
   def test_rstr_exercise
@@ -429,6 +431,17 @@ class TestRosalind < Minitest::Test
     inputo = File.open('../test_data/rosalind_corr.txt').read
     output = File.open('../test_data/sol_corr.txt').read
     assert_equal output, Rosalind.corr(inputo)
+  end
+
+  def test_mmch_basic
+    assert_equal 6, Rosalind.mmch( ">Rosalind_92\nAUGCUUC")
+    assert_equal 144, Rosalind.mmch( ">Rosalind_92\nCAGCGUGAUCAC")
+    assert_equal 14_400, Rosalind.mmch( ">Rosalind_92\nAAAAAAGGGUUUCCCCCC")
+  end
+
+  def test_mmch_exercise
+    inputo = File.open('../test_data/rosalind_mmch.txt').read
+    assert_equal 943431351591740573778686030905344000000000, Rosalind.mmch(inputo)
   end
 
 end
