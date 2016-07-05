@@ -297,18 +297,21 @@ class TestRosalind < Minitest::Test
   end
 
   def test_lgis_basic
-    skip
+    inputo = "5\n5 1 4 2 3"
+    output = "1 2 3\n5 4 2"
+    assert_equal output, Rosalind.lgis(inputo)
+  end
+
+  def test_lgis_basic_2
     inputo = "9\n8 2 1 6 5 7 4 3 9"
-    output = "2 6 7 9\n8 6 5 4 3"
+    output = "2 5 7 9\n8 6 5 4 3"
     assert_equal output, Rosalind.lgis(inputo)
   end
 
   def test_lgis_exercise
-    skip
     inputo = File.open('../test_data/rosalind_lgis.txt').read
     output = File.open('../test_data/sol_lgis.txt').read
-    Rosalind.lgis(inputo)
-    # assert_equal output, Rosalind.lgis(inputo)
+    assert_equal output.size, Rosalind.lgis(inputo).size
   end
 
   def test_sseq_basic
