@@ -12,3 +12,7 @@ task :run => :move do
     sh "bin/rosalind #{file} | pbcopy"
   end
 end
+
+task :all do
+  sh "bin/rosalind examples/*.txt"
+end
