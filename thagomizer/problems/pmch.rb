@@ -43,12 +43,7 @@ nodes = dna.split("")
 groups = nodes.group_by { |i| i }
 groups = Hash[groups.map { |k, v| [k, v.length] }]
 
-pp groups
-
 au_count = factorial groups["A"]
 gc_count = factorial groups["G"]
-
-puts au_count
-puts gc_count
 
 puts au_count * gc_count
