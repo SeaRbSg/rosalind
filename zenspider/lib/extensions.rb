@@ -1,56 +1,3 @@
-class Integer
-  def p m
-    n = self
-
-    n.fact / (n-m).fact
-  end
-
-  def c m
-    n = self
-
-    n.fact / (m.fact * (n-m).fact)
-  end
-
-  def fact
-    return 1 if self < 2
-    self.downto(2).inject(&:*)
-  end
-end
-
-class String
-  def words
-    split
-  end
-
-  def integers
-    words.map(&:to_i)
-  end
-
-  def indicies t
-    idx, hits = 0, []
-    while idx = index(t, idx) do
-      idx += 1
-      hits << idx
-    end
-    hits
-  end
-
-  def floats
-    words.map(&:to_f)
-  end
-
-  def each_slice
-    (0..length).map { |n| yield self[n..-1] }
-  end
-
-  def each_cons n
-    return enum_for(:each_cons, n) unless block_given?
-    chars.each_cons(n) do |a|
-      yield a.join
-    end
-  end
-end
-
 class Array
   def counts
     result = Hash.new 0
@@ -62,12 +9,12 @@ class Array
     result
   end
 
-  def paireq
-    self[0] == self[1]
-  end
-
   def index_hash
     Hash[map.with_index.to_a]
+  end
+
+  def paireq
+    self[0] == self[1]
   end
 
   def spc
@@ -104,5 +51,58 @@ end
 class HashHashArray < Hash
   def initialize
     super { |h,k| h[k] = HashArray.new }
+  end
+end
+
+class Integer
+  def c m
+    n = self
+
+    n.fact / (m.fact * (n-m).fact)
+  end
+
+  def fact
+    return 1 if self < 2
+    self.downto(2).inject(&:*)
+  end
+
+  def p m
+    n = self
+
+    n.fact / (n-m).fact
+  end
+end
+
+class String
+  def each_slice
+    (0..length).map { |n| yield self[n..-1] }
+  end
+
+  def each_cons n
+    return enum_for(:each_cons, n) unless block_given?
+    chars.each_cons(n) do |a|
+      yield a.join
+    end
+  end
+
+  def floats
+    words.map(&:to_f)
+  end
+
+  def integers
+    words.map(&:to_i)
+  end
+
+  def indicies t
+    idx, hits = 0, []
+    while idx = index(t, idx) do
+      idx += 1
+      hits << idx
+    end
+    hits
+  end
+
+  def words
+    split
   end
 end
