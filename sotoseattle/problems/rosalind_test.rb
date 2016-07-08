@@ -31,6 +31,8 @@ require_relative '../problems/kmp.rb'
 require_relative '../problems/corr.rb'
 require_relative '../problems/pdst.rb'
 require_relative '../problems/mmch.rb'
+require_relative '../problems/lcsq.rb'
+require_relative '../problems/rear.rb'
 
 class TestRosalind < Minitest::Test
 
@@ -445,6 +447,45 @@ class TestRosalind < Minitest::Test
   def test_mmch_exercise
     inputo = File.open('../test_data/rosalind_mmch.txt').read
     assert_equal 943431351591740573778686030905344000000000, Rosalind.mmch(inputo)
+  end
+
+  def test_lcsq_basic
+    skip
+    # assert_equal "AACTTG", Rosalind.lcsq(">Rosalind_99\nAACCTTGG\n>Rosalind_64\nACACTGTGA")
+    # assert_equal "AACTTG", Rosalind.lcsq(">Rosalind_99\n#{a}\n>Rosalind_64\n#{b}")
+    n = 1
+    a = "AACCTTGGC"*n
+    b = "ACACTGTGA"*n
+    p a
+    p b
+    pepe = ">Rosalind_99\n#{a}\n>Rosalind_64\n#{b}"
+    assert_equal Rosalind.longest_substr(a, b.chars), Rosalind.lcsq(pepe)
+  end
+
+  def test_lcsq_exercise
+    skip
+    inputo = File.open('../test_data/rosalind_lcsq.txt').read
+    # output = File.open('../test_data/sol_lcsq.txt').read
+    File.open('../test_data/sol_lcsq.txt', 'w') { |f| f.write(Rosalind.lcsq(inputo)) }
+    # assert_equal output, Rosalind.lcsq(inputo)
+    # Rosalind.lcsq(inputo)
+  end
+
+  def test_rear_basic_recursion
+    assert_equal 9, Rosalind.switcheroo([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [3, 1, 5, 2, 7, 4, 9, 6, 10, 8])
+    assert_equal 4, Rosalind.switcheroo([3, 10, 8, 2, 5, 4, 7, 1, 6, 9], [5, 2, 3, 1, 7, 4, 10, 8, 6, 9])
+    assert_equal 5, Rosalind.switcheroo([8, 6, 7, 9, 4, 1, 3, 10, 2, 5], [8, 2, 7, 6, 9, 1, 5, 3, 10, 4])
+    assert_equal 2, Rosalind.switcheroo([8, 6, 7, 9, 4, 1, 3, 10, 2, 5], [8, 2, 7, 6, 10, 3, 1, 4, 9, 5])
+  end
+
+  def test_rear_basic
+    inputo = "1 2 3 4 5 6 7 8 9 10\n3 1 5 2 7 4 9 6 10 8\n\n3 10 8 2 5 4 7 1 6 9\n5 2 3 1 7 4 10 8 6 9\n\n8 6 7 9 4 1 3 10 2 5\n8 2 7 6 9 1 5 3 10 4\n\n3 9 10 4 1 8 6 7 5 2\n2 9 8 5 1 7 3 4 6 10\n\n1 2 3 4 5 6 7 8 9 10\n1 2 3 4 5 6 7 8 9 10"
+    assert_equal "9 4 5 7 0", Rosalind.rear(inputo)
+  end
+
+  def test_rear_exercise
+    inputo = File.open('../test_data/rosalind_rear.txt').read
+    assert_equal '9 6 5 5 4', Rosalind.rear(inputo)
   end
 
 end
