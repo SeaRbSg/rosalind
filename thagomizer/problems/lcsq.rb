@@ -31,39 +31,33 @@ require '../fasta'
 
 dna1, dna2 = Fasta.new("lcsq.txt").read_dnas.values.map(&:str).sort_by(&:length)
 
-## Keep track of the last character used in the subsequence in each
-## dna string. Move through each string character by character and
-## look to see if the ith character of DNA1 appears in any of the
-## unused characters in dna2. Also figure out if the ith character of
-## DNA2 appears in any of the unused characters of dna1. Pick
-## whichever one results in the fewest used characters.
+## Use recursion
+
+$cache = {}
+$cache["&"] = ""
 
 
-max = [dna1.length, dna2.length].max
-i1  = 0
-i2  = 0
-seq = ""
+def find_subsequence str1, str2
+  key = "#{str1}&#{str2}"
+  return $cache[key] if $cache[key]
+  result = ""
 
-0.upto(max) do |i|
+  return result if str1.empty? or str2.empty?
 
-  begin
-    fuck = dna1[i1..i].index(dna2[i]) + i1
-    shit = dna2[i2..i].index(dna1[i]) + i2
-  rescue
-    next
-  end
-
-  if fuck < shit then
-    seq << dna2[i]
-    i1 = fuck + 1
-    i2 = i + 1
+  if str1[-1] == str2[-1] then
+    result << str1[-1]
+    result << find_subsequence(str1[0..-2], str2[0..-2])
   else
-    seq << dna1[i]
-    i1 = i + 1
-    i2 = shit + 1
+    branch1 = find_subsequence(str1[0..-2], str2)
+    branch2 = find_subsequence(str1, str2[0..-2])
+    if branch1.length > branch2.length
+      result << branch1
+    else
+      result << branch2
+    end
   end
-
-  i += 1
+  $cache[key] = result
+  result
 end
 
-puts seq
+puts find_subsequence(dna1, dna2).reverse
