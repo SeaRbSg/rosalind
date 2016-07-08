@@ -26,49 +26,44 @@
 # AACTGG
 
 require 'pp'
+require 'pry'
 require '../fasta'
 
 dna1, dna2 = Fasta.new("lcsq.txt").read_dnas.values.map(&:str).sort_by(&:length)
 
-## This is a dynamic programming problem. Starting with a single
-## character we want to know where that character is found after a
-## specific point in the string. location["A", 5] should equal the
-## index of a specific character starting at character 5.
+## Keep track of the last character used in the subsequence in each
+## dna string. Move through each string character by character and
+## look to see if the ith character of DNA1 appears in any of the
+## unused characters in dna2. Also figure out if the ith character of
+## DNA2 appears in any of the unused characters of dna1. Pick
+## whichever one results in the fewest used characters.
 
-bases = %w[A C G T]
 
-location1 = Hash.new { |h, k| h[k] = {} }
-location2 = Hash.new { |h, k| h[k] = {} }
+max = [dna1.length, dna2.length].max
+i1  = 0
+i2  = 0
+seq = ""
 
-(0...dna1.length).each do |offset|
-  bases.each do |base|
-    location1[offset][base] = dna1.index(base, offset) || 1001
+0.upto(max) do |i|
+
+  begin
+    fuck = dna1[i1..i].index(dna2[i]) + i1
+    shit = dna2[i2..i].index(dna1[i]) + i2
+  rescue
+    next
   end
+
+  if fuck < shit then
+    seq << dna2[i]
+    i1 = fuck + 1
+    i2 = i + 1
+  else
+    seq << dna1[i]
+    i1 = i + 1
+    i2 = shit + 1
+  end
+
+  i += 1
 end
 
-(0...dna2.length).each do |offset|
-  bases.each do |base|
-    location2[offset][base] = dna2.index(base, offset) || 1001
-  end
-end
-
-pp location1
-pp location2
-
-offset1 = 0
-offset2 = 0
-# loop do
-
-#   base1, val1 = location1[offset1].min_by { |_, v| v }
-#   base2, val2 = location2[offset2].min_by { |_, v| v }
-
-#   binding.pry
-
-#   if base1 != base2 then
-#     val2 = location2[offset2][base1]
-#   end
-
-#   print base1
-#   offset1 = val1 + 1
-#   offset2 = val2 + 1
-# end
+puts seq
