@@ -26,7 +26,6 @@
 # AACTGG
 
 require 'pp'
-require 'pry'
 require '../fasta'
 
 dna1, dna2 = Fasta.new("lcsq.txt").read_dnas.values.map(&:str).sort_by(&:length)
