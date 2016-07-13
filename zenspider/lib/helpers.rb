@@ -284,6 +284,23 @@ module Helpers
     }
   end
 
+  @@subsequence = {}
+
+  def subsequence a, b
+    @@subsequence[[a, b]] ||=
+    case
+    when a.empty? || b.empty? then
+      ""
+    when a[0] == b[0] then
+      a[0] + subsequence(a[1..-1], b[1..-1])
+    else
+      c = subsequence(a[1..-1], b)
+      d = subsequence(a, b[1..-1])
+
+      [c, d].max_by(&:size)
+    end
+  end
+
   def triangle n
     (n * n - n) / 2
   end

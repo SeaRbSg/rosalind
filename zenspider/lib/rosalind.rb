@@ -91,6 +91,12 @@ class Rosalind
     end
   end
 
+  def cmd_lcsq s
+    a, b = fasta(s).values
+
+    subsequence a, b
+  end
+
   def cmd_lexf s
     a = s.words
     l = a.pop.to_i
