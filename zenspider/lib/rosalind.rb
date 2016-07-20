@@ -164,6 +164,20 @@ class Rosalind
     }.compact
   end
 
+  def cmd_maj s
+    k, n, *rest = s.integers
+
+    rows = rest.each_slice n
+
+    rows.map { |row|
+      h = Hash.new 0
+      row.each do |x|
+        h[x] += 1
+      end
+      h.keys.find { |x| h[x] > n/2 } || -1
+    }.line
+  end
+
   def cmd_mrna s
     counts = RNA_CODON.values.counts
 
