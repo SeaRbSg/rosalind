@@ -31,7 +31,7 @@ require_relative '../problems/kmp.rb'
 require_relative '../problems/corr.rb'
 require_relative '../problems/pdst.rb'
 require_relative '../problems/mmch.rb'
-require_relative '../problems/lcsq.rb'
+# require_relative '../problems/lcsq.rb'
 require_relative '../problems/rear.rb'
 
 class TestRosalind < Minitest::Test
