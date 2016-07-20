@@ -26,14 +26,7 @@ data = File.read("maj.txt").split("\n").map { |l| l.split(/\s/) }
 
 data.shift
 
-data.each do |ary|
+puts data.map { |ary|
   k, v = ary.group_by { |x| x }.max_by { |h, v| v.length }
-
-  if v.length > (ary.length / 2) then
-    print "#{k} "
-  else
-    print "-1 "
-  end
-end
-
-puts
+  v.length > (ary.length / 2) ? k : -1
+}.join(" ")
