@@ -3,7 +3,6 @@ require 'minitest/pride'
 
 require_relative './rosa_graphs.rb'
 require_relative './maj.rb'
-require_relative './ddeg.rb'
 
 class TestRosaGraphs < Minitest::Test
 
@@ -25,6 +24,16 @@ class TestRosaGraphs < Minitest::Test
     inputo = File.open('../test_data/rosalind_ddeg.txt').read
     output = File.open('../test_data/sol_ddeg.txt').read
     assert_equal output, RosaGraph.new(inputo).ddeg
+  end
+
+  def test_cc_simple
+    inputo = "12 13\n1 2\n1 5\n5 9\n5 10\n9 10\n3 4\n3 7\n3 8\n4 8\n7 11\n8 11\n11 12\n8 12"
+    assert_equal 3, RosaGraph.new(inputo).cc
+  end
+
+  def test_cc_exercise
+    inputo = File.open('../test_data/rosalind_cc.txt').read
+    assert_equal 99, RosaGraph.new(inputo).cc
   end
 
 end
@@ -63,4 +72,5 @@ class TestRosalind < Minitest::Test
     output = File.open('../test_data/sol_maj.txt').read
     assert_equal output, Rosalgors.maj(inputo)
   end
+
 end

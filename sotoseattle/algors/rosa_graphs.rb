@@ -20,4 +20,19 @@ class RosaGraph
     @g.keys.map { |n| @g[n].reduce(0) { |t, m| t += @g[m].size } }.join(" ")
   end
 
+  def cc
+    accum = []
+    @g.keys.count { |n| dive(n, accum) unless accum.include?(n) }
+  end
+
+  private
+
+  def dive node, acc
+    @g[node].each do |o|
+      next if acc.include? o
+      dive o, acc << o
+    end
+    acc
+  end
+
 end
