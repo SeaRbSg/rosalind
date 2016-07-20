@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 
 require_relative './maj.rb'
+require_relative './deg.rb'
 
 class TestRosalind < Minitest::Test
   def test_fibd
@@ -35,6 +36,16 @@ class TestRosalind < Minitest::Test
     inputo = File.open('../test_data/rosalind_maj.txt').read
     output = File.open('../test_data/sol_maj.txt').read
     assert_equal output, Rosalgors.maj(inputo)
+  end
+
+  def test_deg_simple
+    assert_equal "2 4 2 2 2 2", Rosalgors.deg("6 7\n1 2\n2 3\n6 3\n5 6\n2 5\n2 4\n4 1")
+  end
+
+  def test_deg_exercise
+    inputo = File.open('../test_data/rosalind_deg.txt').read
+    output = File.open('../test_data/sol_deg.txt').read
+    assert_equal output, Rosalgors.deg(inputo)
   end
 
 end
