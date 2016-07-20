@@ -27,7 +27,4 @@ max, _  = edges.shift
 
 edges = edges.flatten.group_by { |x| x }
 
-1.upto(max) do |k|
-  print "#{edges[k].length or 0} "
-end
-puts
+puts (1..max).map { |k| edges[k].length or 0 }.join(" ")
