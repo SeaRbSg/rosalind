@@ -21,7 +21,7 @@
 
 require 'pp'
 
-_, _, ary, to_find = File.read("bin.txt").split("\n")
+_, _, ary, to_find = File.read("bins.txt").split("\n")
 
 ary     = ary.split(/\s/).map(&:to_i)
 to_find = to_find.split(/\s/).map(&:to_i)
@@ -44,7 +44,4 @@ def binary_search ary, to_find, offset = 0
          end
 end
 
-to_find.each do |j|
-  print "#{binary_search(ary, j)} "
-end
-puts
+puts to_find.map { |j| binary_search(ary, j) }.join(" ")
