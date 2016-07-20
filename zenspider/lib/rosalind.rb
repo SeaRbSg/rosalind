@@ -27,6 +27,14 @@ class Rosalind
   ##
   # Commands
 
+  def cmd_bins s
+    n, m, *rest = s.integers
+    ary = rest[0, n]
+    ints = rest[n, m]
+
+    ints.map { |i| ary.bsearch_index { |x| i - x } || -2 }.map(&:succ).line
+  end
+
   def cmd_cons s
     profile   = profile s
     consensus = consensus profile
