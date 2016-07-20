@@ -1,4 +1,4 @@
-class Rosalind
+class Rosalgors
   @@cache = {}
 
   def self.fibo n
@@ -8,7 +8,6 @@ class Rosalind
                      1
                    else
                      fibo(n - 1) + fibo(n - 2)
-                     # (2..m).inject(0) { |t, i| t += self.fibd(n-i, m) }
                    end
   end
 end
