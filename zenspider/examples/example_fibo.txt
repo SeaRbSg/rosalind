@@ -1,0 +1,11 @@
+# Given: A positive integer n <= 25.
+# 
+# Return: The value of Fn.
+# 
+# Sample Dataset
+
+6
+
+# Sample Output
+# 
+# 8

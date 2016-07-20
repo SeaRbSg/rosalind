@@ -48,6 +48,10 @@ class Rosalind
     fibd n, m
   end
 
+  def cmd_fibo s
+    fib(s.integers.first, 1)
+  end
+
   def cmd_gc s
     gc fasta s
   end
