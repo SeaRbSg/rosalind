@@ -35,7 +35,7 @@ class Rosalind
   end
 
   def cmd_dna s
-    count_dna(s).join " "
+    count_dna(s).line
   end
 
   def cmd_fib s
@@ -120,8 +120,8 @@ class Rosalind
   def cmd_lgis s
     max, *ary = s.integers
 
-    a = lgis(ary).join " "
-    b = lgis(ary.reverse).reverse.join " "
+    a = lgis(ary).line
+    b = lgis(ary.reverse).reverse.line
     [a, b]
   end
 
@@ -164,7 +164,7 @@ class Rosalind
   def cmd_perm s
     n = s.to_i
     p = 1.upto(n).to_a.permutation
-    [p.size, p.map { |a| a.join " " }]
+    [p.size, p.map { |a| a.line }]
   end
 
   def cmd_pmch s
@@ -184,7 +184,7 @@ class Rosalind
   def cmd_prob s
     dna, *probs = s.words
 
-    prob(dna, probs.map(&:to_f)).map { |f| "%.3f" % f }.join " "
+    prob(dna, probs.map(&:to_f)).map { |f| "%.3f" % f }.line
   end
 
   def cmd_prot s
@@ -226,7 +226,7 @@ class Rosalind
   def cmd_sseq s
     dna, pat = fasta(s).values
 
-    indicies(dna, pat).join " "
+    indicies(dna, pat).line
   end
 
   def cmd_sset s
@@ -240,7 +240,7 @@ class Rosalind
 
     perms = signed_permutation n
 
-    [perms.length, perms.map { |a| a.join " " }]
+    [perms.length, perms.map { |a| a.line }]
   end
 
   def cmd_splc s
@@ -254,7 +254,7 @@ class Rosalind
 
   def cmd_subs s
     s, t = s.lines.map(&:chomp)
-    s.indicies(t).join " "
+    s.indicies(t).line
   end
 
   def cmd_tran s

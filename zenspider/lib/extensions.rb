@@ -13,6 +13,10 @@ class Array
     Hash[map.with_index.to_a]
   end
 
+  def line
+    join " "
+  end
+
   def paireq
     self[0] == self[1]
   end
