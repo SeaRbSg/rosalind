@@ -42,6 +42,19 @@ class Rosalind
     [consensus, *profile]
   end
 
+  def cmd_deg s
+    _, _, *r = s.integers
+    edges = r.each_slice 2
+    count = Hash.new 0
+
+    edges.each do |a, b|
+      count[a] += 1
+      count[b] += 1
+    end
+
+    count.sort.map(&:last).line
+  end
+
   def cmd_dna s
     count_dna(s).line
   end
