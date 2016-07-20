@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 
-require_relative './bins.rb'
+require_relative './maj.rb'
 
 class TestRosalind < Minitest::Test
   def test_fibd
@@ -26,5 +26,16 @@ class TestRosalind < Minitest::Test
     output = File.open('../test_data/sol_bins.txt').read
     assert_equal output, Rosalgors.bins(inputo)
   end
+
+  def test_maj_simple
+    assert_equal "5 7 -1 -1", Rosalgors.maj("4 8\n5 5 5 5 5 5 5 5\n8 7 7 7 1 7 3 7\n7 1 6 5 10 100 1000 1\n5 1 6 7 1 1 10 1")
+  end
+
+  def test_maj_exercise
+    inputo = File.open('../test_data/rosalind_maj.txt').read
+    output = File.open('../test_data/sol_maj.txt').read
+    assert_equal output, Rosalgors.maj(inputo)
+  end
+
 end
 
