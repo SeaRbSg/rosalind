@@ -1,10 +1,36 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 
+require_relative './rosa_graphs.rb'
 require_relative './maj.rb'
-require_relative './deg.rb'
+require_relative './ddeg.rb'
+
+class TestRosaGraphs < Minitest::Test
+
+  def test_deg_simple
+    assert_equal "2 4 2 2 2 2", RosaGraph.new("6 7\n1 2\n2 3\n6 3\n5 6\n2 5\n2 4\n4 1").deg
+  end
+
+  def test_deg_exercise
+    inputo = File.open('../test_data/rosalind_deg.txt').read
+    output = File.open('../test_data/sol_deg.txt').read
+    assert_equal output, RosaGraph.new(inputo).deg
+  end
+
+  def test_ddeg_simple
+    assert_equal "3 5 5 5 0", RosaGraph.new("5 4\n1 2\n2 3\n4 3\n2 4").ddeg
+  end
+
+  def test_ddeg_exercise
+    inputo = File.open('../test_data/rosalind_ddeg.txt').read
+    output = File.open('../test_data/sol_ddeg.txt').read
+    assert_equal output, RosaGraph.new(inputo).ddeg
+  end
+
+end
 
 class TestRosalind < Minitest::Test
+
   def test_fibd
     assert_equal 8, Rosalgors.fibo(6)
   end
@@ -37,16 +63,4 @@ class TestRosalind < Minitest::Test
     output = File.open('../test_data/sol_maj.txt').read
     assert_equal output, Rosalgors.maj(inputo)
   end
-
-  def test_deg_simple
-    assert_equal "2 4 2 2 2 2", Rosalgors.deg("6 7\n1 2\n2 3\n6 3\n5 6\n2 5\n2 4\n4 1")
-  end
-
-  def test_deg_exercise
-    inputo = File.open('../test_data/rosalind_deg.txt').read
-    output = File.open('../test_data/sol_deg.txt').read
-    assert_equal output, Rosalgors.deg(inputo)
-  end
-
 end
-
