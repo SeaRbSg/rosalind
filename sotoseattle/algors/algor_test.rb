@@ -7,33 +7,50 @@ require_relative './maj.rb'
 class TestRosaGraphs < Minitest::Test
 
   def test_deg_simple
-    assert_equal "2 4 2 2 2 2", RosaGraph.new("6 7\n1 2\n2 3\n6 3\n5 6\n2 5\n2 4\n4 1").deg
+    assert_equal "2 4 2 2 2 2", UndirGraph.new("6 7\n1 2\n2 3\n6 3\n5 6\n2 5\n2 4\n4 1").deg
   end
 
   def test_deg_exercise
     inputo = File.open('../test_data/rosalind_deg.txt').read
     output = File.open('../test_data/sol_deg.txt').read
-    assert_equal output, RosaGraph.new(inputo).deg
+    assert_equal output, UndirGraph.new(inputo).deg
   end
 
   def test_ddeg_simple
-    assert_equal "3 5 5 5 0", RosaGraph.new("5 4\n1 2\n2 3\n4 3\n2 4").ddeg
+    assert_equal "3 5 5 5 0", UndirGraph.new("5 4\n1 2\n2 3\n4 3\n2 4").ddeg
   end
 
   def test_ddeg_exercise
     inputo = File.open('../test_data/rosalind_ddeg.txt').read
     output = File.open('../test_data/sol_ddeg.txt').read
-    assert_equal output, RosaGraph.new(inputo).ddeg
+    assert_equal output, UndirGraph.new(inputo).ddeg
   end
 
   def test_cc_simple
     inputo = "12 13\n1 2\n1 5\n5 9\n5 10\n9 10\n3 4\n3 7\n3 8\n4 8\n7 11\n8 11\n11 12\n8 12"
-    assert_equal 3, RosaGraph.new(inputo).cc
+    assert_equal 3, UndirGraph.new(inputo).cc
   end
 
   def test_cc_exercise
     inputo = File.open('../test_data/rosalind_cc.txt').read
-    assert_equal 99, RosaGraph.new(inputo).cc
+    assert_equal 99, UndirGraph.new(inputo).cc
+  end
+
+  def test_cyclic?
+    refute DirGraph.new("2 1\n1 2").cyclic?
+    assert DirGraph.new("4 4\n4 1\n1 2\n2 3\n3 1").cyclic?
+    refute DirGraph.new("4 3\n4 3\n3 2\n2 1").cyclic?
+  end
+
+  def test_dag
+    inputo = "3\n\n2 1\n1 2\n\n4 4\n4 1\n1 2\n2 3\n3 1\n\n4 3\n4 3\n3 2\n2 1"
+    assert_equal "1 -1 1", RosalindGraphs.dag(inputo)
+  end
+
+  def test_dag_exercise
+    inputo = File.open('../test_data/rosalind_dag.txt').read
+    output = "-1 1 1 1 -1 -1 -1 -1 -1 -1 -1 -1 1 1 1 -1 -1 1 1 -1"
+    assert_equal output, RosalindGraphs.dag(inputo)
   end
 
 end

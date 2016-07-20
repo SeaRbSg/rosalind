@@ -6,10 +6,24 @@ class RosaGraph
 
   def initialize inputo
     nk, *edges = inputo.split("\n").map { |s| s.split.map(&:to_i) }
-
     @g = {}
     (1..nk.first).each { |n| @g[n] = Set.new }
-    edges.each { |a, b| @g[b] << a && @g[a] << b }
+    edges
+  end
+
+  def dive node, path
+    @g[node].each do |o|
+      next if path.include? o
+      dive o, path << o
+    end
+    path
+  end
+end
+
+class UndirGraph < RosaGraph
+
+  def initialize inputo
+    super(inputo).each { |a, b| @g[b] << a && @g[a] << b }
   end
 
   def deg
@@ -24,15 +38,23 @@ class RosaGraph
     accum = []
     @g.keys.count { |n| dive(n, accum) unless accum.include?(n) }
   end
+end
 
-  private
+class DirGraph < RosaGraph
 
-  def dive node, acc
-    @g[node].each do |o|
-      next if acc.include? o
-      dive o, acc << o
-    end
-    acc
+  def initialize inputo
+    super(inputo).each { |from, to| @g[from] << to }
   end
 
+  def cyclic?
+    @g.keys.any? { |n| dive(n, []).include? n }
+  end
 end
+
+class RosalindGraphs
+  def self.dag inputo
+    inputo.split("\n\n").drop(1)
+          .map { |g| DirGraph.new(g).cyclic? ? -1 : 1 }.join(" ")
+  end
+end
+
