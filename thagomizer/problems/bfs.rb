@@ -23,8 +23,6 @@
 # Sample Output
 # 0 -1 2 1 3 2
 
-require 'pp'
-
 class Graph
   attr_accessor :graph
 
@@ -45,6 +43,28 @@ class Graph
     graph.keys
   end
 
+  def all_distances start
+    queue            = [start]
+    distances        = Hash.new(-1)
+    distances[start] = 0
+
+    until queue.empty? do
+      current = queue.shift
+
+      graph[current].each do |neighbor|
+        if distances[neighbor] == -1 then
+          queue << neighbor
+          distances[neighbor] = distances[current] + 1
+        elsif distances[current] + 1 < distances[neighbor] then
+          queue << neighbor
+          distances[neighbor] = distances[current] + 1
+        end
+      end
+    end
+
+    distances
+  end
+
   def distance start, finish
     queue = [[start, 0]]
     seen  = {start => true}
@@ -62,7 +82,7 @@ class Graph
       end
     end
 
-    return -1
+    -1
   end
 end
 
@@ -70,6 +90,7 @@ end
 edges = File.read("bfs.txt").split("\n").map { |l| l.split(/\s/).map(&:to_i) }
 max, _ = edges.shift
 
-g = Graph.new edges
+g         = Graph.new edges
+distances = g.all_distances(1)
 
-puts g.nodes.sort.map { |n| g.distance(1, n) }.join(' ')
+puts (1..max).map{ |n| distances[n] }.join(' ')
