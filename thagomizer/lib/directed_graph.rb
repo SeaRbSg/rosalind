@@ -1,6 +1,6 @@
 require 'pry'
 
-class Graph
+class DirectedGraph
   attr_accessor :graph, :node_count
 
   def initialize edges, node_count
@@ -13,39 +13,12 @@ class Graph
   def init_from_edges edges
     edges.each do |from, to|
       graph[from] << to
-      graph[to]   << from
+      graph[to]
     end
   end
 
   def nodes
     graph.keys
-  end
-
-  def components
-    stack      = []
-    components = Hash.new { |h, k| h[k] = [] }
-    explored   = Hash.new
-
-    1.upto(node_count) do |n|
-      next if explored[n]
-      stack << [n, n]
-      components[n]
-
-      until stack.empty? do
-        node, component = stack.pop
-        explored[node] = true
-
-        graph[node].each do |neighbor|
-          next if explored[neighbor]
-          unless components[component].include?(neighbor)
-            components[component] << neighbor
-            stack << [neighbor, component]
-          end
-        end
-      end
-    end
-
-    components
   end
 
   def all_distances start
