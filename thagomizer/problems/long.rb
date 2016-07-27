@@ -32,7 +32,7 @@
 # ATTAGACCTGCCGGAATAC
 
 require 'pp'
-require '../fasta'
+require '../lib/fasta'
 
 dnas = Fasta.new("long.txt").read_dnas
 

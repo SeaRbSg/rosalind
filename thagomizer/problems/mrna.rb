@@ -4,7 +4,7 @@
 # protein could have been translated, modulo 1,000,000. (Don't neglect
 # the importance of the stop codon in protein translation.)
 
-require '../protein'
+require '../lib/protein'
 
 protein = Protein.from_file("mrna.txt")
 

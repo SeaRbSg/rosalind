@@ -41,7 +41,7 @@
 
 # Note: If your counts are off remember TTT is two overlapping instances of TT
 
-require '../fasta'
+require '../lib/fasta'
 
 dna = Fasta.new("kmer.txt").read_dnas.values.first.str.chars
 

@@ -22,8 +22,8 @@
 
 # MVYIADKQHVASREAYGHMFKVCA
 
-require '../fasta'
-require '../protein'
+require '../lib/fasta'
+require '../lib/protein'
 
 data = Fasta.new("splc.txt").read_dnas.values
 dna = data.first.str

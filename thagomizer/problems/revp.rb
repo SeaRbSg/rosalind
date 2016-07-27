@@ -15,7 +15,7 @@ def reverse_complement chars
   chars.map { |c| COMPLIMENTS[c] }.reverse
 end
 
-require '../fasta'
+require '../lib/fasta'
 dna = Fasta.new("revp.txt").read_dnas.values.first.str.chars
 
 results = []

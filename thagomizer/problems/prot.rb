@@ -21,7 +21,7 @@
 # UGA Stop   CGA R      AGA R      GGA G
 # UGG W      CGG R      AGG R      GGG G
 
-require '../rna'
+require '../lib/rna'
 
 rna = RNA.from_file("prot.txt")
 

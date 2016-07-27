@@ -1,4 +1,4 @@
-require '../dna'
+require '../lib/dna'
 
 dna = DNA.from_file("dna.txt")
 bases = dna.base_pair_hist

@@ -32,7 +32,7 @@
 
 ## 6
 
-require '../fasta'
+require '../lib/fasta'
 require 'pp'
 
 class Prob

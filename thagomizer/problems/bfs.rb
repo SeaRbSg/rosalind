@@ -23,7 +23,7 @@
 # Sample Output
 # 0 -1 2 1 3 2
 
-require '../graph'
+require '../lib/graph'
 
 edges = File.read("bfs.txt").split("\n").map { |l| l.split(/\s/).map(&:to_i) }
 max, _ = edges.shift

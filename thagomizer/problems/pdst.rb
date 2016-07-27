@@ -33,7 +33,7 @@
 # 0.10000 0.40000 0.00000 0.20000
 # 0.10000 0.30000 0.20000 0.00000
 
-require '../fasta'
+require '../lib/fasta'
 
 dnas = Fasta.new("pdst.txt").read_dnas.values
 

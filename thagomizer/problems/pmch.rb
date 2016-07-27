@@ -30,7 +30,7 @@
 # 12
 
 require 'pp'
-require '../fasta'
+require '../lib/fasta'
 
 def factorial n
   (2..n).inject(&:*)

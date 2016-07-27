@@ -31,7 +31,7 @@
 # 3 8 10
 
 require 'pp'
-require '../fasta'
+require '../lib/fasta'
 
 main, substr = Fasta.new("sseq.txt").read_dnas.values.map(&:str)
 

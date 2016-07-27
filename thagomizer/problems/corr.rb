@@ -46,7 +46,7 @@
 # GAGGA->GATGA
 # TTTCC->TTTCA
 
-require '../fasta'
+require '../lib/fasta'
 
 dnas = Fasta.new("corr.txt").read_dnas
 

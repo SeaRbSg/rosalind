@@ -21,7 +21,7 @@
 # TTATCTGACAAAGAAAGCCGTCAACGGCTGGATAATTTCGCGATCGTGCTGGTTACTGGC
 # GGTACGAGTGTTCCTTTGGGT
 
-require '../fasta'
+require '../lib/fasta'
 
 dnas = Fasta.new("tran.txt").read_dnas.values
 

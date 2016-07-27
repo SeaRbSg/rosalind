@@ -32,7 +32,7 @@
 # AC
 
 require 'pp'
-require '../fasta'
+require '../lib/fasta'
 
 dnas = Fasta.new("lcsm.txt").read_dnas.values.map(&:str).sort_by(&:length)
 

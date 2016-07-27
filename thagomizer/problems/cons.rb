@@ -5,7 +5,7 @@
 # T: 1 5 0 0 0 1 1 6
 
 require 'pp'
-require '../fasta'
+require '../lib/fasta'
 
 dnas = Fasta.new("cons.txt").read_dnas
 len = dnas.values.first.length

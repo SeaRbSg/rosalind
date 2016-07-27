@@ -1,4 +1,4 @@
-require '../dna'
+require '../lib/dna'
 
 lines = File.readlines("hamm.txt")
 dna0 = DNA.from_str(lines[0])

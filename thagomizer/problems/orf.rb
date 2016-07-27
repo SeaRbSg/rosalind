@@ -27,8 +27,8 @@
 # MGMTPRLGLESLLE
 # MTPRLGLESLLE
 
-require '../fasta'
-require '../protein'
+require '../lib/fasta'
+require '../lib/protein'
 
 dna = Fasta.new("orf.txt").read_dnas.values.first
 

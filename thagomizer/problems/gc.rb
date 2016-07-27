@@ -1,4 +1,4 @@
-require '../dna'
+require '../lib/dna'
 
 File.open("gc.txt", 'r') do |f|
   id = ""
