@@ -49,8 +49,6 @@
 # 8 9 A
 # 9 10 T
 
-require 'pry'
-
 class Node
   attr_accessor :children
   attr_accessor :number

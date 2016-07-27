@@ -29,5 +29,5 @@ edges.each do |from, to|
   neighbors[to]   << from
 end
 
-puts (1..max).map { |k| neighbors[k].inject(0) { |memo, i| memo + neighbors[i].length } }.join(' ')
+puts (1..max).map { |k| neighbors[k].inject(0) { |m, i| m + neighbors[i].length } }.join(' ')
 

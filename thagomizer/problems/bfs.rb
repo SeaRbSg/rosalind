@@ -23,22 +23,21 @@
 # Sample Output
 # 0 -1 2 1 3 2
 
-require 'pry'
+require 'pp'
 
 class Graph
-  attr_accessor :edges, :graph
+  attr_accessor :graph
 
   def initialize edges
-    self.edges = edges
     self.graph = Hash.new { |h, k| h[k] = [] }
 
-    graph_from_edges
+    init_from_edges edges
   end
 
-  def graph_from_edges
-    self.edges.each do |from, to|
+  def init_from_edges edges
+    edges.each do |from, to|
       graph[from] << to
-      graph[to]   << from
+      graph[to]
     end
   end
 
@@ -48,21 +47,22 @@ class Graph
 
   def distance start, finish
     queue = [[start, 0]]
-    seen  = [start]
+    seen  = {start => true}
 
-    loop do
+    until queue.empty?
       current, distance = queue.shift
+
+      seen[current] = true
 
       return distance if current == finish
 
       graph[current].each do |neighbor|
-        next if seen.include?(neighbor)
+        next if seen[neighbor]
         queue << [neighbor, distance + 1]
       end
     end
 
     return -1
-
   end
 end
 

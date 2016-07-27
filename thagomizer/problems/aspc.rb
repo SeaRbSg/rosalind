@@ -19,7 +19,6 @@
 # 42
 
 require 'pp'
-require 'pry'
 
 class Fixnum
   def fact
