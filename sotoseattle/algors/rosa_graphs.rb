@@ -7,12 +7,12 @@ class RosaGraph
   def initialize inputo
     nk, *edges = inputo.split("\n").map { |s| s.split.map(&:to_i) }
     @g = {}
-    (1..nk.first).each { |n| @g[n] = Set.new }
+    (1..nk.first).each { |n| g[n] = Set.new }
     edges
   end
 
   def dive node, path
-    @g[node].each do |o|
+    g[node].each do |o|
       next if path.include? o
       dive o, path << o
     end
@@ -23,38 +23,55 @@ end
 class UndirGraph < RosaGraph
 
   def initialize inputo
-    super(inputo).each { |a, b| @g[b] << a && @g[a] << b }
+    super(inputo).each { |a, b| g[b] << a && g[a] << b }
   end
 
   def deg
-    @g.keys.map { |n| @g[n].size }.join(" ")
+    g.keys.map { |n| g[n].size }.join(" ")
   end
 
   def ddeg
-    @g.keys.map { |n| @g[n].reduce(0) { |t, m| t += @g[m].size } }.join(" ")
+    g.keys.map { |n| g[n].reduce(0) { |t, m| t += g[m].size } }.join(" ")
   end
 
   def cc
     accum = []
-    @g.keys.count { |n| dive(n, accum) unless accum.include?(n) }
+    g.keys.count { |n| dive(n, accum) unless accum.include?(n) }
+  end
+
+  def dive4 node, path                  # I'm not happy with this code, fugly!!
+    if path.include?(node)
+      return true if path[-4] == node
+      return false
+    end
+
+    g[node].each { |o| return true if dive4(o, path + [node]) }
+    false
+  end
+
+  def squacycle?
+    g.keys.any? { |n| dive4(n, []) }
   end
 end
 
 class DirGraph < RosaGraph
 
   def initialize inputo
-    super(inputo).each { |from, to| @g[from] << to }
+    super(inputo).each { |from, to| g[from] << to }
   end
 
   def cyclic?
-    @g.keys.any? { |n| dive(n, []).include? n }
+    g.keys.any? { |n| dive(n, []).include? n }
   end
 end
 
 class RosalindGraphs
   def self.dag inputo
-    inputo.split("\n\n").drop(1)
-          .map { |g| DirGraph.new(g).cyclic? ? -1 : 1 }.join(" ")
+    inputo.split("\n\n").drop(1).map { |g| DirGraph.new(g).cyclic? ? -1 : 1 }.join(" ")
+  end
+
+  def self.sq inputo
+    inputo.split("\n\n").drop(1).map { |g| UndirGraph.new(g).squacycle? ? 1 : -1 }.join(" ")
   end
 end
 

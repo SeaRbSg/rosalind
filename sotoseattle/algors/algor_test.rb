@@ -53,6 +53,22 @@ class TestRosaGraphs < Minitest::Test
     assert_equal output, RosalindGraphs.dag(inputo)
   end
 
+  def test_squacycle?
+    assert UndirGraph.new( "4 5\n3 4\n4 2\n3 2\n3 1\n1 2\n").squacycle?
+    assert UndirGraph.new( "4 5\n3 4\n4 1\n1 2\n3 2\n").squacycle?
+    refute UndirGraph.new("4 4\n1 2\n3 4\n2 4\n4 1").squacycle?
+    refute UndirGraph.new("3 2\n1 2\n2 3").squacycle?
+    refute UndirGraph.new("6 6\n1 2\n2 3\n3 4\n4 5\n5 6\n6 1\n").squacycle?
+    refute UndirGraph.new("5 5\n1 2\n2 3\n3 4\n4 5\n5 1\n").squacycle?
+    assert UndirGraph.new("5 5\n1 2\n2 3\n3 4\n4 5\n5 2\n").squacycle?
+  end
+
+  def test_sq_exercise
+    inputo = File.open('../test_data/rosalind_sq.txt').read
+    output = "-1 -1 1 -1 -1 -1 -1 -1 1 -1 1 -1 -1 -1 -1 -1 -1"
+    assert_equal output, RosalindGraphs.sq(inputo)
+  end
+
 end
 
 class TestRosalind < Minitest::Test
@@ -91,3 +107,4 @@ class TestRosalind < Minitest::Test
   end
 
 end
+
