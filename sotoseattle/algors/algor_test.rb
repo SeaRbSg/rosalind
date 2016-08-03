@@ -37,9 +37,9 @@ class TestRosaGraphs < Minitest::Test
   end
 
   def test_cyclic?
-    refute DirGraph.new("2 1\n1 2").cyclic?
-    assert DirGraph.new("4 4\n4 1\n1 2\n2 3\n3 1").cyclic?
-    refute DirGraph.new("4 3\n4 3\n3 2\n2 1").cyclic?
+    assert DirGraph.new("2 1\n1 2").acyclic?
+    refute DirGraph.new("4 4\n4 1\n1 2\n2 3\n3 1").acyclic?
+    assert DirGraph.new("4 3\n4 3\n3 2\n2 1").acyclic?
   end
 
   def test_dag

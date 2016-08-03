@@ -39,13 +39,15 @@ class UndirGraph < RosaGraph
     g.keys.count { |n| dive(n, accum) unless accum.include?(n) }
   end
 
-  def fixed_cycle? node, path, cycle_length = 4
-    if path.include?(node)
-      return true if path[-cycle_length] == node
-      return false
-    end
+  def fixed_cycle? node, path, cycle_length
+    g[node].each do |o|
+      if path.include?(o)
+        return true if path[-cycle_length] == o
+        next
+      end
 
-    g[node].each { |o| return true if fixed_cycle?(o, path + [node]) }
+      return true if fixed_cycle?(o, path +[o], cycle_length)
+    end
     false
   end
 
@@ -60,18 +62,22 @@ class DirGraph < RosaGraph
     super(inputo).each { |from, to| g[from] << to }
   end
 
-  def cyclic?
-    g.keys.none? { |n| dive(n, []).include? n }
+  def acyclic?
+    g.keys.none? { |n| dive(n, []).include?(n) }
   end
 end
 
 class RosalindGraphs
+  def self.batch_graphs inputo, g_type, question
+    inputo.split("\n\n").drop(1).map { |g| g_type.new(g).send(question) ? 1 : -1 }.join(" ")
+  end
+
   def self.dag inputo
-    inputo.split("\n\n").drop(1).map { |g| DirGraph.new(g).cyclic? ? 1 : -1 }.join(" ")
+    batch_graphs inputo, DirGraph, :acyclic?
   end
 
   def self.sq inputo
-    inputo.split("\n\n").drop(1).map { |g| UndirGraph.new(g).square_cycled? ? 1 : -1 }.join(" ")
+    batch_graphs inputo, UndirGraph, :square_cycled?
   end
 end
 
