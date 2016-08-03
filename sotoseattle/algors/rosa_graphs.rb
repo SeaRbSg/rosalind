@@ -39,18 +39,18 @@ class UndirGraph < RosaGraph
     g.keys.count { |n| dive(n, accum) unless accum.include?(n) }
   end
 
-  def dive4 node, path                  # I'm not happy with this code, fugly!!
+  def fixed_cycle? node, path, cycle_length = 4
     if path.include?(node)
-      return true if path[-4] == node
+      return true if path[-cycle_length] == node
       return false
     end
 
-    g[node].each { |o| return true if dive4(o, path + [node]) }
+    g[node].each { |o| return true if fixed_cycle?(o, path + [node]) }
     false
   end
 
-  def squacycle?
-    g.keys.any? { |n| dive4(n, []) }
+  def square_cycled?
+    g.keys.any? { |n| fixed_cycle?(n, [], 4) }
   end
 end
 
@@ -61,17 +61,17 @@ class DirGraph < RosaGraph
   end
 
   def cyclic?
-    g.keys.any? { |n| dive(n, []).include? n }
+    g.keys.none? { |n| dive(n, []).include? n }
   end
 end
 
 class RosalindGraphs
   def self.dag inputo
-    inputo.split("\n\n").drop(1).map { |g| DirGraph.new(g).cyclic? ? -1 : 1 }.join(" ")
+    inputo.split("\n\n").drop(1).map { |g| DirGraph.new(g).cyclic? ? 1 : -1 }.join(" ")
   end
 
   def self.sq inputo
-    inputo.split("\n\n").drop(1).map { |g| UndirGraph.new(g).squacycle? ? 1 : -1 }.join(" ")
+    inputo.split("\n\n").drop(1).map { |g| UndirGraph.new(g).square_cycled? ? 1 : -1 }.join(" ")
   end
 end
 
