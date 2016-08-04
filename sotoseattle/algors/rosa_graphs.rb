@@ -72,6 +72,16 @@ class DirGraph < RosaGraph
   def acyclic?
     g.keys.none? { |n| dfs_path(n, []).include? n }
   end
+
+  def ts
+    nodes, n = g.keys, nil
+    nodes.map do
+      nodes -= [n]
+      children = nodes.map{ |o| g[o].to_a }.flatten.uniq
+      parents  = nodes - children
+      n = parents.first
+    end.join(" ")
+  end
 end
 
 class RosalindGraphs

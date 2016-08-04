@@ -82,6 +82,16 @@ class TestRosaGraphs < Minitest::Test
     assert_equal output, RosalindGraphs.bip(inputo)
   end
 
+  def test_ts_simple
+    assert_equal "4 3 1 2", DirGraph.new("4 5\n1 2\n3 1\n3 2\n4 3\n4 2\n").ts
+  end
+
+  def test_ts_exercise
+    inputo = File.open('../test_data/rosalind_ts.txt').read
+    output = File.open('../test_data/sol_ts.txt').read
+    assert_equal output, DirGraph.new(inputo).ts
+  end
+
 end
 
 class TestRosalind < Minitest::Test
@@ -118,6 +128,5 @@ class TestRosalind < Minitest::Test
     output = File.open('../test_data/sol_maj.txt').read
     assert_equal output, Rosalgors.maj(inputo)
   end
-
 end
 
