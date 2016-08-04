@@ -54,13 +54,13 @@ class TestRosaGraphs < Minitest::Test
   end
 
   def test_squacycle?
-    assert UndirGraph.new( "4 5\n3 4\n4 2\n3 2\n3 1\n1 2\n").square_cycled?
-    assert UndirGraph.new( "4 5\n3 4\n4 1\n1 2\n3 2\n").square_cycled?
-    refute UndirGraph.new("4 4\n1 2\n3 4\n2 4\n4 1").square_cycled?
-    refute UndirGraph.new("3 2\n1 2\n2 3").square_cycled?
-    refute UndirGraph.new("6 6\n1 2\n2 3\n3 4\n4 5\n5 6\n6 1\n").square_cycled?
-    refute UndirGraph.new("5 5\n1 2\n2 3\n3 4\n4 5\n5 1\n").square_cycled?
-    assert UndirGraph.new("5 5\n1 2\n2 3\n3 4\n4 5\n5 2\n").square_cycled?
+    assert UndirGraph.new( "4 5\n3 4\n4 2\n3 2\n3 1\n1 2\n").squared?
+    assert UndirGraph.new( "4 5\n3 4\n4 1\n1 2\n3 2\n").squared?
+    refute UndirGraph.new("4 4\n1 2\n3 4\n2 4\n4 1").squared?
+    refute UndirGraph.new("3 2\n1 2\n2 3").squared?
+    refute UndirGraph.new("6 6\n1 2\n2 3\n3 4\n4 5\n5 6\n6 1\n").squared?
+    refute UndirGraph.new("5 5\n1 2\n2 3\n3 4\n4 5\n5 1\n").squared?
+    assert UndirGraph.new("5 5\n1 2\n2 3\n3 4\n4 5\n5 2\n").squared?
   end
 
   def test_sq_exercise

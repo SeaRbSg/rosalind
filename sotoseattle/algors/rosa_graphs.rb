@@ -11,13 +11,26 @@ class RosaGraph
     edges
   end
 
-  def dive node, path
+  def dfs_path node, path
     g[node].each do |o|
       next if path.include? o
-      dive o, path << o
+      dfs_path o, path << o
     end
     path
   end
+
+  def dfs_query node, path, question
+    g[node].each do |o|
+      if path.include? o
+        return true if question.call path, o
+        next
+      end
+
+      return dfs_query o, path + [o], question
+    end
+    false
+  end
+
 end
 
 class UndirGraph < RosaGraph
@@ -36,40 +49,17 @@ class UndirGraph < RosaGraph
 
   def cc
     accum = []
-    g.keys.count { |n| dive(n, accum) unless accum.include?(n) }
+    g.keys.count { |n| dfs_path(n, accum) unless accum.include?(n) }
   end
 
-  def fixed_cycle? node, path, cycle_length
-    g[node].each do |o|
-      if path.include?(o)
-        return true if path[-cycle_length] == o
-        next
-      end
-
-      return true if fixed_cycle?(o, path +[o], cycle_length)
-    end
-    false
-  end
-
-  def square_cycled?
-    g.keys.any? { |n| fixed_cycle? n, [], 4 }
-  end
-
-  def odd_cycled? node, path
-    g[node].each do |o|
-      if path.include?(o)
-        cycle_length = path.size - path.index(o)
-        return false if cycle_length.odd?
-        break
-      end
-
-      return false unless odd_cycled?(o, path + [o] )
-    end
-    true
+  def squared?
+    query = lambda {|p, o| p[-4] == o}
+    g.keys.any? { |n| dfs_query n, [], query }
   end
 
   def bipartite?
-    g.keys.each { |n| return false unless odd_cycled? n, [] }
+    query = lambda {|p, o| (p.size - p.index(o)).odd?}
+    g.keys.none? { |n| dfs_query n, [], query }
   end
 end
 
@@ -80,7 +70,7 @@ class DirGraph < RosaGraph
   end
 
   def acyclic?
-    g.keys.none? { |n| dive(n, []).include? n }
+    g.keys.none? { |n| dfs_path(n, []).include? n }
   end
 end
 
@@ -94,7 +84,7 @@ class RosalindGraphs
   end
 
   def self.sq inputo
-    batch_graphs inputo, UndirGraph, :square_cycled?
+    batch_graphs inputo, UndirGraph, :squared?
   end
 
   def self.bip inputo
