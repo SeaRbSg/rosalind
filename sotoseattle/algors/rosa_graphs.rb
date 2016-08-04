@@ -52,7 +52,24 @@ class UndirGraph < RosaGraph
   end
 
   def square_cycled?
-    g.keys.any? { |n| fixed_cycle?(n, [], 4) }
+    g.keys.any? { |n| fixed_cycle? n, [], 4 }
+  end
+
+  def odd_cycled? node, path
+    g[node].each do |o|
+      if path.include?(o)
+        cycle_length = path.size - path.index(o)
+        return false if cycle_length.odd?
+        break
+      end
+
+      return false unless odd_cycled?(o, path + [o] )
+    end
+    true
+  end
+
+  def bipartite?
+    g.keys.each { |n| return false unless odd_cycled? n, [] }
   end
 end
 
@@ -63,7 +80,7 @@ class DirGraph < RosaGraph
   end
 
   def acyclic?
-    g.keys.none? { |n| dive(n, []).include?(n) }
+    g.keys.none? { |n| dive(n, []).include? n }
   end
 end
 
@@ -78,6 +95,10 @@ class RosalindGraphs
 
   def self.sq inputo
     batch_graphs inputo, UndirGraph, :square_cycled?
+  end
+
+  def self.bip inputo
+    batch_graphs inputo, UndirGraph, :bipartite?
   end
 end
 

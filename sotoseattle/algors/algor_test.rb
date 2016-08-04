@@ -69,6 +69,19 @@ class TestRosaGraphs < Minitest::Test
     assert_equal output, RosalindGraphs.sq(inputo)
   end
 
+  def test_bip_simple
+    inputo = "2\n\n4 4\n1 2\n2 3\n3 4\n4 1\n\n5 5\n1 2\n2 3\n3 4\n4 5\n5 1\n"
+    assert_equal "1 -1", RosalindGraphs.bip(inputo)
+    inputo = "2\n\n3 3\n1 2\n3 2\n3 1\n\n4 3\n1 4\n3 1\n1 2\n"
+    assert_equal "-1 1", RosalindGraphs.bip(inputo)
+  end
+
+  def test_bip_exercise
+    inputo = File.open('../test_data/rosalind_bip.txt').read
+    output = "1 -1 -1 -1 -1 -1 -1 1 -1 -1 1 1 1 1 -1 -1"
+    assert_equal output, RosalindGraphs.bip(inputo)
+  end
+
 end
 
 class TestRosalind < Minitest::Test
