@@ -11,11 +11,12 @@ class RosaGraph
     edges
   end
 
+  def nodes
+    g.keys
+  end
+
   def dfs_path node, path
-    g[node].each do |o|
-      next if path.include? o
-      dfs_path o, path << o
-    end
+    g[node].each { |o| path.include?(o) ? next : dfs_path(o, path << o) }
     path
   end
 
@@ -40,26 +41,26 @@ class UndirGraph < RosaGraph
   end
 
   def deg
-    g.keys.map { |n| g[n].size }.join(" ")
+    nodes.map { |n| g[n].size }.join(" ")
   end
 
   def ddeg
-    g.keys.map { |n| g[n].reduce(0) { |t, m| t += g[m].size } }.join(" ")
+    nodes.map { |n| g[n].reduce(0) { |t, m| t += g[m].size } }.join(" ")
   end
 
   def cc
     accum = []
-    g.keys.count { |n| dfs_path(n, accum) unless accum.include?(n) }
+    nodes.count { |n| dfs_path(n, accum) unless accum.include?(n) }
   end
 
   def squared?
     query = lambda {|p, o| p[-4] == o}
-    g.keys.any? { |n| dfs_query n, [], query }
+    nodes.any? { |n| dfs_query n, [], query }
   end
 
   def bipartite?
     query = lambda {|p, o| (p.size - p.index(o)).odd?}
-    g.keys.none? { |n| dfs_query n, [], query }
+    nodes.none? { |n| dfs_query n, [], query }
   end
 end
 
@@ -70,16 +71,15 @@ class DirGraph < RosaGraph
   end
 
   def acyclic?
-    g.keys.none? { |n| dfs_path(n, []).include? n }
+    nodes.none? { |n| dfs_path(n, []).include? n }
   end
 
   def ts
-    nodes, n = g.keys, nil
-    nodes.map do
-      nodes -= [n]
-      children = nodes.map{ |o| g[o].to_a }.flatten.uniq
-      parents  = nodes - children
-      n = parents.first
+    vrtx, head = nodes, nil
+    vrtx.map do
+      vrtx -= [head]
+      hang = vrtx.collect{ |n| g[n].to_a }.flatten
+      head = (vrtx - hang).first
     end.join(" ")
   end
 end
@@ -89,16 +89,8 @@ class RosalindGraphs
     inputo.split("\n\n").drop(1).map { |g| g_type.new(g).send(question) ? 1 : -1 }.join(" ")
   end
 
-  def self.dag inputo
-    batch_graphs inputo, DirGraph, :acyclic?
-  end
-
-  def self.sq inputo
-    batch_graphs inputo, UndirGraph, :squared?
-  end
-
-  def self.bip inputo
-    batch_graphs inputo, UndirGraph, :bipartite?
-  end
+  def self.dag inputo; batch_graphs inputo, DirGraph,   :acyclic?;   end
+  def self.sq inputo;  batch_graphs inputo, UndirGraph, :squared?;   end
+  def self.bip inputo; batch_graphs inputo, UndirGraph, :bipartite?; end
 end
 
