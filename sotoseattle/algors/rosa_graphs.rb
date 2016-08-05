@@ -75,11 +75,11 @@ class DirGraph < RosaGraph
   end
 
   def ts
-    vrtx, o = nodes, nil
+    vrtx, tops = nodes, []
     vrtx.map do
-      vrtx -= [o]
-      o = (vrtx - vrtx.collect{ |n| g[n].to_a }.flatten).first
-    end.join(" ")
+      vrtx -= tops
+      tops = vrtx - vrtx.collect{ |o| g[o].to_a }.flatten
+    end.join(" ").strip
   end
 end
 
