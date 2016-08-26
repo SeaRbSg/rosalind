@@ -22,12 +22,10 @@
 raw_data = File.read("mer.txt").split("\n").map{ |l| l.split(/\s/).map(&:to_i) }
 
 data = []
-p    = []
 
 data[0]    = raw_data[1]
 data[1]    = raw_data[3]
 merged_ary = []
-p[0], p[1] = 0
 
 loop do
   if data[0].empty? then
