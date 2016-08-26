@@ -32,18 +32,11 @@ k.times do
   results = ""
   i = 0
   while i < ary.length do
-    j = i + 1
 
-    while j < ary.length do
-      if ary[i] == (-1 * ary[j]) then
-        results = "#{i + 1} #{j + 1}"
-        break
-      end
-      j += 1
-    end
+    j = ary.rindex(-1 * ary[i])
 
-    unless results.empty? then
-      puts results
+    if j and j != i then
+      puts "#{i + 1} #{j + 1}"
       break
     end
 
