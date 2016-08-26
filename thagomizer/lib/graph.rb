@@ -1,5 +1,3 @@
-require 'pry'
-
 class Graph
   attr_accessor :graph, :node_count
 
@@ -85,5 +83,23 @@ class Graph
     end
 
     -1
+  end
+
+  def adjacency_matrix
+    matrix = Array.new(self.node_count + 1, [])
+
+    1.upto(self.node_count).each do |i|
+      1.upto(self.node_count).each do |j|
+        if graph[i + 1].include?(j + 1) then
+          puts "[#{i}][#{j}]"
+          
+          matrix[i][j] = 1
+        else
+          matrix[i][j] = 0
+        end
+      end
+    end
+
+    matrix
   end
 end
