@@ -29,12 +29,26 @@ k, n = data.shift.split(/\s/).map(&:to_i)
 k.times do
   ary = data.shift.split(/\s/).map(&:to_i)
 
-  pairs = ary.group_by { |x| x.abs }.values.map(&:uniq).compact.select { |y| y.size == 2 }
+  results = ""
+  i = 0
+  while i < ary.length do
+    j = i + 1
 
-  unless pairs.empty?
-    pairs = pairs.map { |p| p.map { |item| ary.index(item) } }
-    puts pairs.min_by { |a, b| b }.map { |x| x + 1 }.join(' ')
-  else
-    puts -1
+    while j < ary.length do
+      if ary[i] == (-1 * ary[j]) then
+        results = "#{i + 1} #{j + 1}"
+        break
+      end
+      j += 1
+    end
+
+    unless results.empty? then
+      puts results
+      break
+    end
+
+    i += 1
+
+    puts -1 if i == ary.length
   end
 end
