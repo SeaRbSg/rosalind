@@ -16,11 +16,13 @@
 # Sample Output
 # 13
 
-data = File.read("med.txt").split("\n")
+require "../lib/rosalind_input"
+
+data = RosalindInput.new("med.txt").to_ints
 
 _   = data.shift
-ary = data.shift.split(" ").map(&:to_i)
-k   = data.shift.to_i
+ary = data.shift
+k   = data.shift[0]
 
 loop do
   r = ary[Random.rand(0...ary.length)]
@@ -38,7 +40,7 @@ loop do
     puts s_m[0]
     break
   else
-    k - = s_l.length + s_m.length
+    k -= s_l.length + s_m.length
     ary = s_h
     next
   end

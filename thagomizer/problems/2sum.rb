@@ -21,13 +21,14 @@
 # -1
 # 1 3
 
-data = File.read("2sum.txt").split(/\n/)
+require "../lib/rosalind_input"
 
-k, n = data.shift.split(/\s/).map(&:to_i)
+data = RosalindInput.new("2sum.txt").ints
 
+k, n = data.shift
 
 k.times do
-  ary = data.shift.split(/\s/).map(&:to_i)
+  ary = data.shift
 
   results = ""
   i = 0
