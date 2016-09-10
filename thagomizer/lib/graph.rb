@@ -1,3 +1,5 @@
+require 'matrix'
+
 class Graph
   attr_accessor :graph, :node_count
 
@@ -85,21 +87,23 @@ class Graph
     -1
   end
 
-  def adjacency_matrix
-    matrix = Array.new(self.node_count + 1, [])
+  def degree n
+    graph[n].count
+  end
 
-    1.upto(self.node_count).each do |i|
-      1.upto(self.node_count).each do |j|
-        if graph[i + 1].include?(j + 1) then
-          puts "[#{i}][#{j}]"
-          
-          matrix[i][j] = 1
-        else
-          matrix[i][j] = 0
-        end
-      end
+  def adjacency_matrix
+    m = Matrix.build(node_count, node_count) do |row, col|
+      graph[row + 1].include?(col + 1) ? 1 : 0
     end
 
-    matrix
+    m
+  end
+
+  def adjacency_matrix_tf
+    m = Matrix.build(node_count, node_count) do |row, col|
+      graph[row + 1].include?(col + 1) ? true : false
+    end
+
+    m
   end
 end
