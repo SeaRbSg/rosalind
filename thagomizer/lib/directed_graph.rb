@@ -1,4 +1,4 @@
-require 'matrix'
+require "matrix"
 
 class DirectedGraph
   attr_accessor :graph, :node_count
@@ -69,19 +69,35 @@ class DirectedGraph
   end
 
   def acyclic?
-    # http://stackoverflow.com/questions/583876/how-do-i-check-if-a-directed-graph-is-acyclic
-
     # Find a node that does not have any incoming edges
     # Columns with no 1s in the adjacency matrix correspond to nodes
     # with no incoming edges.
-    
+    node = nil
 
+    graph.each_key do |n|
+      next if graph.values.any? { |v| v.include? n }
+      node = n
+      break
+    end
+
+    return false unless node
 
     # Start a DFS search on that node, when you go to add a node see
     # if you've already visited it (it is already on the stack, if so,
     # there's a cycle.
+    stack = [[node, []]]
 
+    until stack.empty? do
+      current, path = stack.pop
 
+      p = path + [current]
 
+      graph[current].each do |neighbor|
+        return false if p.include?(neighbor)
+        stack << [neighbor, p]
+      end
+    end
+
+    return true
   end
 end
