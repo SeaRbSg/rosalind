@@ -20,8 +20,9 @@
 # Sample Output
 
 # 2 4 2 2 2 2
+require "../lib/rosalind_input"
 
-edges = File.read("deg.txt").split("\n").map { |l| l.split(/\s/).map(&:to_i) }
+edges = RosalindInput.new("deg.txt").ints
 
 max, _  = edges.shift
 

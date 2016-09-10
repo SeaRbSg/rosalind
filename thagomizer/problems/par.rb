@@ -14,7 +14,9 @@
 # Sample Output
 # 5 6 3 4 1 2 7 9 8
 
-ary = File.read("par.txt").split("\n")[1].split(/\s/).map(&:to_i)
+require "../lib/rosalind_input"
+
+ary = RosalindInput.new("par.txt").ints[1]
 
 pivot = ary.shift
 left, right = ary.partition { |x| x < pivot }

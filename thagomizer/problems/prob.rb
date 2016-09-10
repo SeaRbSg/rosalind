@@ -15,9 +15,11 @@
 
 # -5.737 -5.217 -5.263 -5.360 -5.958 -6.628 -7.009
 
+require "../lib/rosalind_input"
+
 bases = %w[A T G C]
 
-dna, probs = File.read("prob.txt").strip.split("\n")
+dna, probs = RosalindInput.new("prob.txt").lines
 probs = probs.split(' ').map(&:to_f)
 
 counts = {}

@@ -20,9 +20,9 @@
 # Sample Output
 # 5 7 -1 -1
 
-require 'pp'
+require "../lib/rosalind_input"
 
-data = File.read("maj.txt").split("\n").map { |l| l.split(/\s/) }
+data = RosalindInput.new("maj.txt").nested_arrays
 
 data.shift
 

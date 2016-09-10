@@ -27,9 +27,9 @@
 # 2 -1
 # 2 1
 
-require 'pp'
+require "../lib/rosalind_input"
 
-n = File.read("sign.txt").strip.to_i
+n = RosalindInput.new("sign.txt").int
 
 coeffs = (Array.new(n) { |_| 1 } + Array.new(n) { |_| -1 }).permutation(n).to_a
 

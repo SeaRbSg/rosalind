@@ -1,6 +1,6 @@
-require 'pp'
+require "../lib/rosalind_input"
 
-n_mos, $n_litters = File.read('fibd.txt').chomp.split(' ').map(&:to_i)
+n_mos, $n_litters = RosalindInput.new("fibd.txt").ints[0]
 
 $results = {}
 

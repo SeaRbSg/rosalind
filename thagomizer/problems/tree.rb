@@ -34,8 +34,10 @@
 # Sample Output:
 # 3
 
-n, *edges = File.read("tree.txt").strip.split("\n")
+require "../lib/rosalind_input"
 
-n = n.to_i
+n, *edges = RosalindInput.new("tree.txt").ints
+
+n = n[0]
 
 puts n - edges.length - 1

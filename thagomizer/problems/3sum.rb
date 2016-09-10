@@ -19,16 +19,16 @@
 # 1 2 3
 # -1
 
-require 'pp'
+require "../lib/rosalind_input"
 
-data = File.read("3sum.txt").split(/\n/)
+data = RosalindInput.new("3sum.txt").ints
 
-k, n = data.shift.split(/\s/).map(&:to_i)
+k, n = data.shift
 
 results = []
 
 k.times do |x|
-  orig_ary = data.shift.split(/\s/).map(&:to_i)
+  orig_ary = data.shift
   h = {}
   orig_ary.each_with_index { |x, index| h[x] ||= index + 1 }
 

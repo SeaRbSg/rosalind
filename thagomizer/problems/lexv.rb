@@ -59,9 +59,9 @@
 # AAD
 # AAN
 
-require 'pp'
+require "../lib/rosalind_input"
 
-alphabet, size = File.read("lexv.txt").split("\n")
+alphabet, size = RosalindInput.new("lexv.txt").lines
 size           = size.to_i
 alphabet       = alphabet.split(" ")
 $ordering      = Hash[alphabet.zip(0..(alphabet.size))]

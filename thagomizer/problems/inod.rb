@@ -14,6 +14,8 @@
 # that a graph with no cycles and n nodes is a tree precisely when it
 # has n - 1 edges. This is indeed a theorem of graph theory.
 
-n = File.read("inod.txt").strip.to_i
+require "../lib/rosalind_input"
+
+n = RosalindInput.new("inod.txt").int
 
 puts n - 2

@@ -25,14 +25,11 @@
 # 1 2 3
 # 5 4 2
 
-require 'pp'
+require "../lib/rosalind_input"
 
 Struct.new("Entry", :asc_len, :asc_data, :dsc_len, :dsc_data)
 
-n, arr = File.read("lgis.txt").strip.split("\n")
-
-n = n.to_i
-arr = arr.split(" ").map(&:to_i)
+n, arr = RosalindInput.new("lgis.txt").ints
 
 results = Hash.new { |h, k| results[k] = Struct::Entry.new(0, [], 0, []) }
 

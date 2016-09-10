@@ -29,6 +29,8 @@
 # Sample Output
 # 7 5 1 3 2
 
+require "../lib/rosalind_input"
+
 class Heap
   def initialize
     @data       = []
@@ -55,7 +57,7 @@ class Heap
   end
 end
 
-ary = File.read("hea.txt").split("\n")[1].split(/\s/).map(&:to_i)
+ary = RosalindInput.new("hea.txt").ints[1]
 
 heap = Heap.new
 ary.each { |x| heap.insert x }

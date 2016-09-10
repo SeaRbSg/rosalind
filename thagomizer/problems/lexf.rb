@@ -35,7 +35,9 @@
 # CG
 # CC
 
-alphabet, size = File.read("lexf.txt").split("\n")
+require "../lib/rosalind_input"
+
+alphabet, size = RosalindInput.new("lexf.txt").lines
 
 alphabet = alphabet.split(" ")
 size = size.to_i

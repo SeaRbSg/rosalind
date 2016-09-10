@@ -22,9 +22,11 @@
 ## Aa - aa =>  50% chance of dominant phenotype
 ## aa - aa =>   0% chance of dominant phenotype
 
+require "../lib/rosalind_input"
+
 PROBS = [1.0, 1.0, 1.0, 0.75, 0.5, 0.0]
 
-data = File.read("iev.txt").split(' ').map { |x| x.to_i }
+data = RosalindInput.new("iev.txt").ints[0]
 
 expected = 0
 data.zip(PROBS) { |x, y| expected += x * y }

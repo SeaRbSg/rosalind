@@ -27,9 +27,11 @@
 # {8, 9, 10, 6, 7}
 # {1, 3, 4, 6, 7, 9}
 
-require 'pp'
+require "../lib/rosalind_input"
 
-n, a, b = File.read("seto.txt").split("\n")
+
+n, a, b = RosalindInput.new("seto.txt").lines
+
 n = n.to_i
 s = (1..n).to_a
 a = a.gsub(/(\{|\}|\,)/, '').split(/\s/).map(&:to_i)

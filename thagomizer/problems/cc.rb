@@ -27,8 +27,9 @@
 # 3
 
 require "../lib/graph"
+require "../lib/rosalind_input"
 
-edges = File.read("cc.txt").split("\n").map { |l| l.split(/\s/).map(&:to_i) }
+edges = RosalindInput.new("cc.txt").ints
 max, _ = edges.shift
 
 g = Graph.new edges, max

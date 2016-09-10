@@ -1,4 +1,6 @@
-n = File.read("perm.txt").chomp.to_i
+require '../lib/rosalind_input'
+
+n = RosalindInput.new("perm.txt").int
 
 ary = (1..n).to_a
 puts ary.inject(1, :*)

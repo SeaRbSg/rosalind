@@ -1,4 +1,6 @@
-n_mos, litter_size = File.read('fib.txt').chomp.split(' ').map(&:to_i)
+require "../lib/rosalind_input"
+
+n_mos, litter_size = RosalindInput.new("fib.txt").ints[0]
 
 results = [0, 1, 1]
 

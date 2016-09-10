@@ -49,6 +49,8 @@
 # 8 9 A
 # 9 10 T
 
+require "../lib/rosalind_input"
+
 class Node
   attr_accessor :children
   attr_accessor :number
@@ -102,7 +104,7 @@ end
 
 trie = Trie.new
 
-strs = File.read("trie.txt").strip.split("\n")
+strs = RosalindInput.new("trie.txt").lines
 
 strs.each do |str|
   trie.insert str

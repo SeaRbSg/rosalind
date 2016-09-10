@@ -19,6 +19,7 @@
 # 42
 
 require 'pp'
+require "../lib/rosalind_input"
 
 class Fixnum
   def fact
@@ -27,7 +28,7 @@ class Fixnum
   end
 end
 
-n, m = File.read("aspc.txt").split(/\s/).map(&:to_i)
+n, m = RosalindInput.new("aspc.txt").ints.first
 
 puts (m..n).inject(0) { |z, k| z + (n.fact / (k.fact * (n - k).fact))
 } % 1_000_000

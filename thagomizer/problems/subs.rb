@@ -19,11 +19,12 @@
 
 # Return: All locations of t as a substring of s.
 
-require 'strscan'
+require "strscan"
+require "../lib/rosalind_input"
 
 locations = []
 
-main_str, sub_str = File.read("subs.txt").strip.split("\n")
+main_str, sub_str = RosalindInput.new("subs.txt").lines
 
 sub_length = sub_str.length
 (0...main_str.length).each do |i|

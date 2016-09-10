@@ -36,10 +36,9 @@
 #    P20840_SAG1_YEAST
 #    79 109 135 248 306 348 364 402 485 501 614
 
-require 'open-uri'
+require "open-uri"
 
 NGLYCO = /N[^P][ST][^P]/
-
 
 ids = File.readlines("mprt.txt").map { |l| l.strip }
 

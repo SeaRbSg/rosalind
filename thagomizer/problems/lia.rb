@@ -15,7 +15,8 @@
 # Expected Output
 # 0.684
 
-require 'pp'
+require "pp"
+require "../lib/rosalind_input"
 
 ## Probability of AaBb in the first generation: 1/4
 ## Probability of AaBb in the second generation: is also 1/4 no matter
@@ -30,7 +31,7 @@ def nCk n, k
   factorial(n) / (factorial(k) * factorial(n - k))
 end
 
-k, n = File.read("lia.txt").chomp.split(' ').map(&:to_i)
+k, n = RosalindInput.new("lia.txt").ints[0]
 
 organisms = 2**k
 result = 0.0

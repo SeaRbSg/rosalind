@@ -1,13 +1,9 @@
-require '../lib/dna'
+require "../lib/dna"
+require "../lib/rosalind_input"
 
-lines = File.readlines("hamm.txt")
+
+lines = RosalindInput.new("hamm.txt").lines
 dna0 = DNA.from_str(lines[0])
 dna1 = DNA.from_str(lines[1])
 
-puts dna0.hamming_distance(dna1)
-
-puts "TEST"
-puts "Should be 7"
-dna0 = DNA.from_str("GAGCCTACTAACGGGAT")
-dna1 = DNA.from_str("CATCGTAATGACGGCCT")
 puts dna0.hamming_distance(dna1)

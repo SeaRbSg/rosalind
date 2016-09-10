@@ -19,7 +19,9 @@
 # Sample Output
 # -5 2 4 10 11 12 18
 
-raw_data = File.read("mer.txt").split("\n").map{ |l| l.split(/\s/).map(&:to_i) }
+require "../lib/rosalind_input"
+
+raw_data = RosalindInput.new("mer.txt").ints
 
 data = []
 

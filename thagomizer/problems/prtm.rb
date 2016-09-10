@@ -3,7 +3,6 @@
 # Return: The total weight of P. Consult the monoisotopic mass table.
 
 # Example: SKADYEK => 821.392
-require 'pp'
 
 MASSES = { 'A' => 71.03711,
            'C' => 103.00919,

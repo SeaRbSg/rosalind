@@ -23,7 +23,7 @@
 #     → invariant: a[1..i] is sorted
 # end
 
-require 'pp'
+require "../lib/rosalind_input"
 
 def instrumented_insertion_sort ary, swap_count = 0
   (1...ary.length).each do |i|
@@ -41,6 +41,6 @@ def instrumented_insertion_sort ary, swap_count = 0
   swap_count
 end
 
-_, ary = File.read("ins.txt").split("\n").map { |l| l.split(/\s/).map(&:to_i) }
+_, ary = RosalindInput.new("ins.txt").ints
 
 puts instrumented_insertion_sort ary

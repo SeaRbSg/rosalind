@@ -35,7 +35,8 @@
 # Sample Output
 # 8
 
+require "../lib/rosalind_input"
 
-n = File.read("sset.txt").strip.to_i
+n = RosalindInput.new("sset.txt").int
 
 puts (2 ** n) % 1_000_000

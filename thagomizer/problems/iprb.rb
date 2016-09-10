@@ -1,4 +1,4 @@
-require 'pp'
+require "../lib/rosalind_input"
 
 # Given: Three positive integers k, m, and n, representing a
 # population containing k+m+n organisms: k individuals are homozygous
@@ -10,7 +10,7 @@ require 'pp'
 # displaying the dominant phenotype). Assume that any two organisms
 # can mate.
 
-dominant, hetero, recessive = File.read("iprb.txt").chomp.split(' ').map(&:to_f)
+dominant, hetero, recessive = RosalindInput.new("iprb.txt").floats[0]
 
 # r_r = (recessive / total) * ((recessive - 1) / (total - 1))
 # h_h = (hetero / total) * ((hetero - 1) / (total - 1))

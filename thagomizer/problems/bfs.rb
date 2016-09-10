@@ -23,9 +23,10 @@
 # Sample Output
 # 0 -1 2 1 3 2
 
-require '../lib/directed_graph'
+require "../lib/directed_graph"
+require "../lib/rosalind_input"
 
-edges = File.read("bfs.txt").split("\n").map { |l| l.split(/\s/).map(&:to_i) }
+edges = RosalindInput.new("bfs.txt").ints
 max, _ = edges.shift
 
 g         = DirectedGraph.new edges, max

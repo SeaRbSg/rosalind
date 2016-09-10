@@ -22,7 +22,9 @@
 
 # 51200
 
-n, k = File.read("pper.txt").split(' ').map(&:to_i)
+require "../lib/rosalind_input"
+
+n, k = RosalindInput.new("pper.txt").ints[0]
 
 def factorial n
   (2..n).inject(:*)

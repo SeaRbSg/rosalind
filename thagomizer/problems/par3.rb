@@ -19,9 +19,9 @@
 # Sample Output
 # 2 1 4 4 4 5 7 6 5
 
-require 'pp'
+require "../lib/rosalind_input"
 
-ary = File.read("par3.txt").split(/\n/)[1].split(/\s/).map(&:to_i)
+ary = RosalindInput.new("par3.txt").ints[1]
 
 groups = ary.group_by { |x| x <=> ary[0] }
 

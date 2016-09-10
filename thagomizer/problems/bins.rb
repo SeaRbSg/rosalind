@@ -20,11 +20,9 @@
 # 4 1 -1 -1 4 2
 
 require 'pp'
+require "../lib/rosalind_input"
 
-_, _, ary, to_find = File.read("bins.txt").split("\n")
-
-ary     = ary.split(/\s/).map(&:to_i)
-to_find = to_find.split(/\s/).map(&:to_i)
+_, _, ary, to_find = RosalindInput.new("bins.txt").ints
 
 def binary_search ary, to_find, offset = 0
   return -1 if ary.empty?

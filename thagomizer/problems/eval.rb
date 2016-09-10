@@ -33,7 +33,9 @@
 # 0.422 0.563 0.422
 
 ## Setup
-n, dna, ary = File.read("eval.txt").split("\n")
+require "../lib/rosalind_input"
+
+n, dna, ary = RosalindInput.new("eval.txt").lines
 
 n   = n.to_i
 ary = ary.split(" ").map(&:to_f)

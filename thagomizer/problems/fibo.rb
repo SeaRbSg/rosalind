@@ -8,7 +8,9 @@
 # Return:
 # The value of Fn.
 
-n = File.read('fibo.txt').to_i
+require "../lib/rosalind_input"
+
+n = RosalindInput.new('fibo.txt').int
 
 def fib n
   return n if n < 2

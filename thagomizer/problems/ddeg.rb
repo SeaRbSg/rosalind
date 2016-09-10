@@ -18,8 +18,9 @@
 
 
 require 'pp'
+require "../lib/rosalind_input"
 
-edges = File.read("ddeg.txt").split("\n").map { |l| l.split(/\s/).map(&:to_i) }
+edges = RosalindInput.new("ddeg.txt").ints
 max, _ = edges.shift
 
 neighbors = Hash.new { |h,k| h[k] = [] }
@@ -30,4 +31,3 @@ edges.each do |from, to|
 end
 
 puts (1..max).map { |k| neighbors[k].inject(0) { |m, i| m + neighbors[i].length } }.join(' ')
-
