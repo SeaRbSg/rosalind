@@ -30,32 +30,7 @@
 # 7 5 1 3 2
 
 require "../lib/rosalind_input"
-
-class Heap
-  def initialize
-    @data       = []
-    @next_index = 1
-  end
-
-  def insert x
-    @data[@next_index] = x
-    i = @next_index
-
-    while i > 1 do
-      break if @data[i/2] > x
-
-      temp      = @data[i/2]
-      @data[i/2] = x
-      @data[i]   = temp
-      i = i/ 2
-    end
-    @next_index += 1
-  end
-
-  def to_s
-    @data.join(' ')
-  end
-end
+require "../lib/heap"
 
 ary = RosalindInput.new("hea.txt").ints[1]
 
