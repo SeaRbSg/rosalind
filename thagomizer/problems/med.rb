@@ -18,7 +18,7 @@
 
 require "../lib/rosalind_input"
 
-data = RosalindInput.new("med.txt").to_ints
+data = RosalindInput.new("med.txt").ints
 
 _   = data.shift
 ary = data.shift
