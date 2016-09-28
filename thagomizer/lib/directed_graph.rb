@@ -3,6 +3,17 @@ require "matrix"
 class DirectedGraph
   attr_accessor :graph, :node_count
 
+  def self.from_edge_list edge_list
+    node_count, edge_count = edge_list.shift
+
+    edges = []
+    edge_count.times do
+      edges << edge_list.shift
+    end
+
+    g = self.new edges, node_count
+  end
+
   def initialize edges, node_count
     self.node_count = node_count
     self.graph = Hash.new { |h, k| h[k] = [] }
@@ -19,6 +30,36 @@ class DirectedGraph
 
   def nodes
     graph.keys
+  end
+
+  def topological_sort
+    ## Generate InDegree Hash
+    indegrees = Hash.new(0)
+
+    graph.each do |_, neighbors|
+      neighbors.each do |n|
+        indegrees[n] += 1
+      end
+    end
+
+    ## Find all nodes with indegree zero and add them to a stack
+    stack = []
+    nodes.each do |n|
+      stack << n if indegrees[n] == 0
+    end
+
+    sorted = []
+
+    until stack.empty? do
+      current = stack.pop
+      sorted << current
+
+      graph[current].each do |n|
+        indegrees[n] -= 1
+        stack << n if indegrees[n] == 0
+      end
+    end
+    sorted
   end
 
   def all_distances start

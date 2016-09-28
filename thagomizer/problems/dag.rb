@@ -29,7 +29,7 @@
 
 require "../lib/directed_graph"
 require "../lib/rosalind_input"
-require "pp"
+require "../lib/directed_graph"
 
 data = RosalindInput.new("dag.txt").ints
 
