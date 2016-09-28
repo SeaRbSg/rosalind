@@ -32,6 +32,10 @@ class DirectedGraph
     graph.keys
   end
 
+  def edge? from, to
+    graph[from].include? to
+  end
+
   def topological_sort
     ## Generate InDegree Hash
     indegrees = Hash.new(0)
