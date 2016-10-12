@@ -17,17 +17,11 @@
 # Sample Output
 # 4 3 1 2
 
-
-## Basic algorithm:
-## Put it in the sorted list and then add all of its children to a
-## queue
-
 require "../lib/rosalind_input"
 require "../lib/directed_graph"
-
 
 data = RosalindInput.new("ts.txt").ints
 
 g = DirectedGraph.from_edge_list(data)
 
-puts g.topological_sort.join(" ")
+puts g.tsort.join(" ")

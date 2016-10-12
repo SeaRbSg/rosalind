@@ -1,6 +1,9 @@
 require "matrix"
+require "tsort"
 
 class DirectedGraph
+  include TSort
+
   attr_accessor :graph, :node_count
 
   def self.from_edge_list edge_list
@@ -23,8 +26,8 @@ class DirectedGraph
 
   def init_from_edges edges
     edges.each do |from, to|
-      graph[from] << to
-      graph[to]
+      graph[from]
+      graph[to] << from
     end
   end
 
@@ -32,38 +35,16 @@ class DirectedGraph
     graph.keys
   end
 
-  def edge? from, to
-    graph[from].include? to
+  # def edge? from, to
+  #   graph[to].include? from
+  # end
+
+  def tsort_each_node(&block)
+    (1..node_count).each(&block)
   end
 
-  def topological_sort
-    ## Generate InDegree Hash
-    indegrees = Hash.new(0)
-
-    graph.each do |_, neighbors|
-      neighbors.each do |n|
-        indegrees[n] += 1
-      end
-    end
-
-    ## Find all nodes with indegree zero and add them to a stack
-    stack = []
-    nodes.each do |n|
-      stack << n if indegrees[n] == 0
-    end
-
-    sorted = []
-
-    until stack.empty? do
-      current = stack.pop
-      sorted << current
-
-      graph[current].each do |n|
-        indegrees[n] -= 1
-        stack << n if indegrees[n] == 0
-      end
-    end
-    sorted
+  def tsort_each_child(node, &block)
+    graph[node].each(&block)
   end
 
   def all_distances start
@@ -105,44 +86,17 @@ class DirectedGraph
     -1
   end
 
-  def adjacency_matrix
-    m = Matrix.build(node_count, node_count) do |row, col|
-      graph[row + 1].include?(col + 1) ? 1 : 0
-    end
+  # def adjacency_matrix
+  #   m = Matrix.build(node_count, node_count) do |row, col|
+  #     graph[row + 1].include?(col + 1) ? 1 : 0
+  #   end
 
-    m
-  end
+  #   m
+  # end
 
   def acyclic?
-    # Find a node that does not have any incoming edges
-    # Columns with no 1s in the adjacency matrix correspond to nodes
-    # with no incoming edges.
-    node = nil
-
-    graph.each_key do |n|
-      next if graph.values.any? { |v| v.include? n }
-      node = n
-      break
-    end
-
-    return false unless node
-
-    # Start a DFS search on that node, when you go to add a node see
-    # if you've already visited it (it is already on the stack, if so,
-    # there's a cycle.
-    stack = [[node, []]]
-
-    until stack.empty? do
-      current, path = stack.pop
-
-      p = path + [current]
-
-      graph[current].each do |neighbor|
-        return false if p.include?(neighbor)
-        stack << [neighbor, p]
-      end
-    end
-
-    return true
+    self.tsort
+  rescue TSort::Cyclic
+    return false
   end
 end
