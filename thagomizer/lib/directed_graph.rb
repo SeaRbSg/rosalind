@@ -47,25 +47,6 @@ class DirectedGraph
     graph[node].each(&block)
   end
 
-  # def all_distances start
-  #   queue            = [start]
-  #   distances        = Hash.new(-1)
-  #   distances[start] = 0
-
-  #   until queue.empty? do
-  #     current = queue.shift
-
-  #     graph[current].each do |neighbor|
-  #       if distances[neighbor] == -1 then
-  #         queue << neighbor
-  #         distances[neighbor] = distances[current] + 1
-  #       end
-  #     end
-  #   end
-
-  #   distances
-  # end
-
   def distance start, finish
     queue = [[start, 0]]
     seen  = {start => true}
@@ -85,14 +66,6 @@ class DirectedGraph
 
     -1
   end
-
-  # def adjacency_matrix
-  #   m = Matrix.build(node_count, node_count) do |row, col|
-  #     graph[row + 1].include?(col + 1) ? 1 : 0
-  #   end
-
-  #   m
-  # end
 
   def acyclic?
     self.tsort

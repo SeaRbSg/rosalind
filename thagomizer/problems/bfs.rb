@@ -31,6 +31,6 @@ require "../lib/rosalind_input"
 edges = RosalindInput.new("bfs.txt").ints
 max, _ = edges.shift
 
-g         = DirectedGraph.new edges, max
+g = DirectedGraph.new edges, max
 
 puts (1..max).map { |n| g.distance n, 1 }.join(" ")
