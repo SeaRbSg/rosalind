@@ -47,24 +47,24 @@ class DirectedGraph
     graph[node].each(&block)
   end
 
-  def all_distances start
-    queue            = [start]
-    distances        = Hash.new(-1)
-    distances[start] = 0
+  # def all_distances start
+  #   queue            = [start]
+  #   distances        = Hash.new(-1)
+  #   distances[start] = 0
 
-    until queue.empty? do
-      current = queue.shift
+  #   until queue.empty? do
+  #     current = queue.shift
 
-      graph[current].each do |neighbor|
-        if distances[neighbor] == -1 then
-          queue << neighbor
-          distances[neighbor] = distances[current] + 1
-        end
-      end
-    end
+  #     graph[current].each do |neighbor|
+  #       if distances[neighbor] == -1 then
+  #         queue << neighbor
+  #         distances[neighbor] = distances[current] + 1
+  #       end
+  #     end
+  #   end
 
-    distances
-  end
+  #   distances
+  # end
 
   def distance start, finish
     queue = [[start, 0]]

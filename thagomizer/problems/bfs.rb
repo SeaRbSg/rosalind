@@ -23,6 +23,8 @@
 # Sample Output
 # 0 -1 2 1 3 2
 
+#### BROKEN WITH NEW DIRECTED GRAPH
+
 require "../lib/directed_graph"
 require "../lib/rosalind_input"
 
@@ -30,6 +32,5 @@ edges = RosalindInput.new("bfs.txt").ints
 max, _ = edges.shift
 
 g         = DirectedGraph.new edges, max
-distances = g.all_distances(1)
 
-puts (1..max).map{ |n| distances[n] }.join(' ')
+puts (1..max).map { |n| g.distance n, 1 }.join(" ")
